@@ -6,68 +6,86 @@
   <title>Cadastro de Hóspede</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <aside class="sidebar">
-    <nav>
-      <a href="index.html">⌂ Início</a>
-      <a class="active" href="cadastro-hospedes.html">☷ Cadastrar Hóspede</a>
-      <a href="reservas.html">▣ Reservas</a>
-      <a href="quartos.html">▤ Quartos</a>
-    </nav>
-  </aside>
+  <header class="topo">
+    <div class="logo">
+      <img
+        src="https://static.wixstatic.com/media/ba5321_61740a2cd04d47279f1d99a928465122~mv2.png/v1/fill/w_221,h_63,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo%20SETECEB%20Branca.png"
+        alt="Logo SETECEB"
+      >
+    </div>
 
-  <main class="content">
+    <nav class="menu-topo">
+      <a href="index.html">Início</a>
+      <a href="cadastro-hospedes.html">Hóspedes</a>
+      <a href="reservas.html">Reservas</a>
+      <a href="quartos.html">Quartos</a>
+    </nav>
+  </header>
+
+  <main class="main">
+
     <h1>Cadastro de Hóspede</h1>
     <p class="subtitle">Preencha os dados do hóspede e selecione o quarto</p>
 
     <section class="form-card">
       <form>
-        <label>Nome Completo</label>
-        <input type="text" placeholder="Digite o nome completo do hóspede">
 
-        <label>Telefone</label>
-        <input type="text" placeholder="(00) 00000-0000">
+        <div class="form-group">
+          <label>Nome Completo</label>
+          <input type="text" placeholder="Digite o nome completo do hóspede">
+        </div>
+
+        <div class="form-group">
+          <label>Telefone</label>
+          <input type="text" placeholder="(00) 00000-0000">
+        </div>
 
         <div class="form-row">
-          <div>
+          <div class="form-group">
             <label>Data de Entrada</label>
             <input type="date">
           </div>
 
-          <div>
+          <div class="form-group">
             <label>Data de Saída</label>
             <input type="date">
           </div>
         </div>
 
-        <label>Seleção de Quarto</label>
-        <select>
-          <option>Selecione um quarto</option>
-          <option>Quarto 01 - Disponível</option>
-          <option>Quarto 02 - Disponível</option>
-          <option>Quarto 03 - Reservado</option>
-        </select>
+        <div class="form-group">
+          <label>Seleção de Quarto</label>
+          <select>
+            <option>Selecione um quarto</option>
+            <option>Quarto 01 - Disponível</option>
+            <option>Quarto 02 - Disponível</option>
+            <option>Quarto 03 - Reservado</option>
+          </select>
+        </div>
 
-        <div class="actions">
-          <button type="button" class="btn-primary" onclick="salvarCadastro()">
+        <div class="form-buttons">
+          <button type="button" class="btn primary" onclick="salvarCadastro()">
             Salvar Cadastro
           </button>
 
-          <button type="reset" class="btn-secondary">
+          <button type="reset" class="btn secondary">
             Cancelar
           </button>
         </div>
 
         <p id="mensagem" class="mensagem"></p>
+
       </form>
     </section>
+
   </main>
 
   <script>
     function salvarCadastro() {
       document.getElementById("mensagem").innerHTML =
-      "Reserva realizada com sucesso!";
+      "Cadastro realizado com sucesso!";
     }
   </script>
 
