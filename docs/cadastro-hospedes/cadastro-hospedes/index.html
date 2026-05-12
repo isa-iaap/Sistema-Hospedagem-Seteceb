@@ -25,7 +25,18 @@
     <label>Quarto:</label><br>
     <input type="text"><br><br>
 
-    <button type="submit">Salvar Cadastro</button>
+    <button type="button" onclick="salvarCadastro()">
+  Salvar Cadastro
+</button>
+
+<p id="mensagem"></p>
+
+<script>
+function salvarCadastro() {
+  document.getElementById("mensagem").innerHTML =
+  "Hóspede cadastrado com sucesso!";
+}
+</script>
   </form>
 
 </body>
