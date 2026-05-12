@@ -199,7 +199,7 @@ body {
   color: white;
 }
 
-.secondary {
-  background: #f1f5f9;
-  color: #334155;
+/* ÍCONE PRETO */
+.secondary svg {
+  color: #000000;
 }
