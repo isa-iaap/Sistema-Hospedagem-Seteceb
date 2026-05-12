@@ -6,13 +6,12 @@
 
 body {
   background: #f6f8fb;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Segoe UI', Arial, sans-serif;
   color: #0f172a;
   min-height: 100vh;
 }
 
 /* TOPO */
-/* TOPO MODERNO */
 .topo {
   width: 100%;
   height: 140px;
@@ -29,7 +28,6 @@ body {
   height: auto;
 }
 
-/* MENU DO TOPO */
 .menu-topo {
   display: flex;
   gap: 42px;
@@ -38,24 +36,24 @@ body {
 .menu-topo a {
   color: white;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: 0.3s;
-  font-family: 'Segoe UI', sans-serif;
+  letter-spacing: 1.2px;
+  font-weight: 600;
 }
 
-.menu-topo a:hover {
+.menu-topo a:hover,
+.menu-topo a.active {
   color: #f59e0b;
 }
 
-/* LAYOUT EMBAIXO DO TOPO */
+/* LAYOUT */
 .layout {
   display: flex;
-  min-height: calc(100vh - 90px);
+  min-height: calc(100vh - 140px);
 }
 
-/* MENU */
+/* MENU LATERAL */
 .sidebar {
   width: 255px;
   background: #ffffff;
@@ -122,10 +120,11 @@ body {
 }
 
 .card strong {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
 }
 
+/* ÍCONES */
 .icon {
   width: 48px;
   height: 48px;
@@ -133,6 +132,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.icon svg {
+  width: 24px;
+  height: 24px;
 }
 
 .blue {
@@ -182,6 +186,7 @@ body {
   font-size: 14px;
 }
 
+/* BOTÕES */
 .btn {
   display: block;
   padding: 15px;
@@ -189,6 +194,7 @@ body {
   text-decoration: none;
   margin-bottom: 12px;
   text-align: center;
+  font-weight: 600;
 }
 
 .primary {
