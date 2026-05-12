@@ -1,130 +1,71 @@
- (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
-diff --git a/index.html b/index.html
-index 359e27458987b4c94e977869877e67d6d5f8f35c..0a7417e310ce248485dd810df0879a1682e9133c 100644
---- a/index.html
-+++ b/index.html
-@@ -1,81 +1,93 @@
- <!DOCTYPE html>
- <html lang="pt-BR">
- <head>
-   <meta charset="UTF-8" />
-   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <title>Sistema de Hospedagem SETECEB</title>
-   <link rel="stylesheet" href="style.css" />
- </head>
- <body>
--
--  <aside class="sidebar">
-+  <aside class="sidebar" aria-label="Menu principal">
-     <nav class="menu">
--      <a href="index.html" class="active">🏠 Início</a>
--      <a href="cadastro-hospedes.html">👥 Cadastrar Hóspede</a>
--      <a href="reservas.html">📅 Reservas</a>
--      <a href="quartos.html">🛏️ Quartos</a>
-+      <a href="index.html" class="menu-link active" aria-current="page">
-+        <span class="menu-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M9.5 21v-7h5v7"/></svg></span>
-+        Início
-+      </a>
-+      <a href="cadastro-hospedes.html" class="menu-link">
-+        <span class="menu-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-+        Cadastrar Hóspede
-+      </a>
-+      <a href="reservas.html" class="menu-link">
-+        <span class="menu-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg></span>
-+        Reservas
-+      </a>
-+      <a href="quartos.html" class="menu-link">
-+        <span class="menu-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21v-8"/><path d="M21 21v-8"/><path d="M3 17h18"/><path d="M6 13V7h8a4 4 0 0 1 4 4v2"/><path d="M6 10h4"/></svg></span>
-+        Quartos
-+      </a>
-     </nav>
-   </aside>
- 
-   <main class="content">
-     <section class="header">
-       <h1>Painel de Controle</h1>
-       <p>Visão geral do sistema de hospedagem</p>
-     </section>
- 
--    <section class="dashboard">
--      <div class="card">
-+    <section class="dashboard" aria-label="Resumo do sistema">
-+      <article class="stat-card">
-         <div>
-           <span>Total de Hóspedes</span>
-           <strong>0</strong>
-         </div>
--        <div class="icon blue">👥</div>
--      </div>
-+        <div class="stat-icon blue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-+      </article>
- 
--      <div class="card">
-+      <article class="stat-card">
-         <div>
-           <span>Quartos Disponíveis</span>
-           <strong>10</strong>
-         </div>
--        <div class="icon green">🛏️</div>
--      </div>
-+        <div class="stat-icon green"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21v-8"/><path d="M21 21v-8"/><path d="M3 17h18"/><path d="M6 13V7h8a4 4 0 0 1 4 4v2"/><path d="M6 10h4"/></svg></div>
-+      </article>
- 
--      <div class="card">
-+      <article class="stat-card">
-         <div>
-           <span>Quartos Ocupados</span>
-           <strong>0</strong>
-         </div>
--        <div class="icon red">✅</div>
--      </div>
-+        <div class="stat-icon red"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-+      </article>
- 
--      <div class="card">
-+      <article class="stat-card">
-         <div>
-           <span>Reservas Ativas</span>
-           <strong>0</strong>
-         </div>
--        <div class="icon yellow">📅</div>
--      </div>
-+        <div class="stat-icon yellow"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg></div>
-+      </article>
-     </section>
- 
-     <section class="bottom-area">
--      <div class="panel">
-+      <article class="panel">
-         <h2>Ações Rápidas</h2>
- 
--        <a href="cadastro-hospedes.html" class="primary-button">
--          👥 Cadastrar Novo Hóspede
-+        <a href="cadastro-hospedes.html" class="action-button primary-button">
-+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-+          Cadastrar Novo Hóspede
-         </a>
- 
--        <a href="quartos.html" class="secondary-button">
--          🛏️ Ver Quartos Disponíveis
-+        <a href="quartos.html" class="action-button secondary-button">
-+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21v-8"/><path d="M21 21v-8"/><path d="M3 17h18"/><path d="M6 13V7h8a4 4 0 0 1 4 4v2"/><path d="M6 10h4"/></svg></span>
-+          Ver Quartos Disponíveis
-         </a>
--      </div>
-+      </article>
- 
--      <div class="panel">
-+      <article class="panel">
-         <h2>Últimas Reservas</h2>
-         <p>Nenhuma reserva cadastrada ainda</p>
--      </div>
-+      </article>
-     </section>
-   </main>
--
- </body>
- </html>
- 
-EOF
-)
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Hospedagem SETECEB</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <aside class="sidebar">
+    <a class="menu-item active" href="index.html">⌂ <span>Início</span></a>
+    <a class="menu-item" href="cadastro-hospedes.html">♙ <span>Cadastrar Hóspede</span></a>
+    <a class="menu-item" href="reservas.html">▣ <span>Reservas</span></a>
+    <a class="menu-item" href="quartos.html">▤ <span>Quartos</span></a>
+  </aside>
+
+  <main class="main">
+    <h1>Painel de Controle</h1>
+    <p class="subtitle">Visão geral do sistema de hospedagem</p>
+
+    <section class="grid">
+      <div class="card">
+        <div>
+          <p>Total de Hóspedes</p>
+          <strong>0</strong>
+        </div>
+        <span class="icon blue">♙</span>
+      </div>
+
+      <div class="card">
+        <div>
+          <p>Quartos Disponíveis</p>
+          <strong>10</strong>
+        </div>
+        <span class="icon green">▤</span>
+      </div>
+
+      <div class="card">
+        <div>
+          <p>Quartos Ocupados</p>
+          <strong>0</strong>
+        </div>
+        <span class="icon red">✓</span>
+      </div>
+
+      <div class="card">
+        <div>
+          <p>Reservas Ativas</p>
+          <strong>0</strong>
+        </div>
+        <span class="icon yellow">▣</span>
+      </div>
+    </section>
+
+    <section class="bottom">
+      <div class="panel">
+        <h2>Ações Rápidas</h2>
+        <a class="btn primary" href="cadastro-hospedes.html">♙ Cadastrar Novo Hóspede</a>
+        <a class="btn secondary" href="quartos.html">▤ Ver Quartos Disponíveis</a>
+      </div>
+
+      <div class="panel">
+        <h2>Últimas Reservas</h2>
+        <p>Nenhuma reserva cadastrada ainda</p>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
