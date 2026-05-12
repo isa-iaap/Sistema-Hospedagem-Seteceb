@@ -12,20 +12,41 @@ body {
 }
 
 /* TOPO */
+/* TOPO MODERNO */
 .topo {
+  width: 100%;
+  height: 140px;
   background: #000000;
-  color: white;
-  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
 }
 
-.topo h1,
-.topo p {
-  color: white;
+.logo img {
+  width: 220px;
+  height: auto;
 }
 
-.topo p {
+/* MENU DO TOPO */
+.menu-topo {
+  display: flex;
+  gap: 42px;
+}
+
+.menu-topo a {
+  color: white;
+  text-decoration: none;
   font-size: 14px;
- color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: 0.3s;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.menu-topo a:hover {
+  color: #f59e0b;
 }
 
 /* LAYOUT EMBAIXO DO TOPO */
