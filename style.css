@@ -67,16 +67,17 @@ body {
 }
 
 .main h1 {
-  width: 100%;
   font-size: 22px;
   margin-bottom: 12px;
+  text-align: center;
 }
 
 .subtitle {
-  width: 100%;
   color: #475569;
   margin-bottom: 34px;
+  text-align: center;
 }
+
 /* CARDS */
 .grid {
   display: grid;
