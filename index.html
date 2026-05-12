@@ -1,43 +1,81 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sistema de Hospedagem SETECEB</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div class="sidebar">
-    <h2>SETECEB</h2>
+  <aside class="sidebar">
+    <nav class="menu">
+      <a href="index.html" class="active">🏠 Início</a>
+      <a href="cadastro-hospedes.html">👥 Cadastrar Hóspede</a>
+      <a href="reservas.html">📅 Reservas</a>
+      <a href="quartos.html">🛏️ Quartos</a>
+    </nav>
+  </aside>
 
-    <a href="index.html">Início</a>
-    <a href="cadastro-hospedes.html">Cadastrar Hóspede</a>
-    <a href="reservas.html">Reservas</a>
-    <a href="quartos.html">Quartos</a>
-  </div>
+  <main class="content">
+    <section class="header">
+      <h1>Painel de Controle</h1>
+      <p>Visão geral do sistema de hospedagem</p>
+    </section>
 
-  <div class="content">
-    <h1>Painel de Controle</h1>
-    <p>Visão geral do sistema de hospedagem.</p>
-
-    <div class="cards">
+    <section class="dashboard">
       <div class="card">
-        <h3>Total de Hóspedes</h3>
-        <p>0</p>
+        <div>
+          <span>Total de Hóspedes</span>
+          <strong>0</strong>
+        </div>
+        <div class="icon blue">👥</div>
       </div>
 
       <div class="card">
-        <h3>Quartos Disponíveis</h3>
-        <p>10</p>
+        <div>
+          <span>Quartos Disponíveis</span>
+          <strong>10</strong>
+        </div>
+        <div class="icon green">🛏️</div>
       </div>
 
       <div class="card">
-        <h3>Reservas Ativas</h3>
-        <p>0</p>
+        <div>
+          <span>Quartos Ocupados</span>
+          <strong>0</strong>
+        </div>
+        <div class="icon red">✅</div>
       </div>
-    </div>
-  </div>
+
+      <div class="card">
+        <div>
+          <span>Reservas Ativas</span>
+          <strong>0</strong>
+        </div>
+        <div class="icon yellow">📅</div>
+      </div>
+    </section>
+
+    <section class="bottom-area">
+      <div class="panel">
+        <h2>Ações Rápidas</h2>
+
+        <a href="cadastro-hospedes.html" class="primary-button">
+          👥 Cadastrar Novo Hóspede
+        </a>
+
+        <a href="quartos.html" class="secondary-button">
+          🛏️ Ver Quartos Disponíveis
+        </a>
+      </div>
+
+      <div class="panel">
+        <h2>Últimas Reservas</h2>
+        <p>Nenhuma reserva cadastrada ainda</p>
+      </div>
+    </section>
+  </main>
 
 </body>
 </html>
