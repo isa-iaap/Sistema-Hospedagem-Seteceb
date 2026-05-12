@@ -1,130 +1,155 @@
- (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
-diff --git a/index.html b/index.html
-index 359e27458987b4c94e977869877e67d6d5f8f35c..0a7417e310ce248485dd810df0879a1682e9133c 100644
---- a/index.html
-+++ b/index.html
-@@ -1,81 +1,93 @@
- <!DOCTYPE html>
- <html lang="pt-BR">
- <head>
-   <meta charset="UTF-8" />
-   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <title>Sistema de Hospedagem SETECEB</title>
-   <link rel="stylesheet" href="style.css" />
- </head>
- <body>
--
--  <aside class="sidebar">
-+  <aside class="sidebar" aria-label="Menu principal">
-     <nav class="menu">
--      <a href="index.html" class="active">🏠 Início</a>
--      <a href="cadastro-hospedes.html">👥 Cadastrar Hóspede</a>
--      <a href="reservas.html">📅 Reservas</a>
--      <a href="quartos.html">🛏️ Quartos</a>
-+      <a href="index.html" class="menu-link active" aria-current="page">
-+        <span class="menu-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M9.5 21v-7h5v7"/></svg></span>
-+        Início
-+      </a>
-+      <a href="cadastro-hospedes.html" class="menu-link">
-+        <span class="menu-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-+        Cadastrar Hóspede
-+      </a>
-+      <a href="reservas.html" class="menu-link">
-+        <span class="menu-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg></span>
-+        Reservas
-+      </a>
-+      <a href="quartos.html" class="menu-link">
-+        <span class="menu-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21v-8"/><path d="M21 21v-8"/><path d="M3 17h18"/><path d="M6 13V7h8a4 4 0 0 1 4 4v2"/><path d="M6 10h4"/></svg></span>
-+        Quartos
-+      </a>
-     </nav>
-   </aside>
- 
-   <main class="content">
-     <section class="header">
-       <h1>Painel de Controle</h1>
-       <p>Visão geral do sistema de hospedagem</p>
-     </section>
- 
--    <section class="dashboard">
--      <div class="card">
-+    <section class="dashboard" aria-label="Resumo do sistema">
-+      <article class="stat-card">
-         <div>
-           <span>Total de Hóspedes</span>
-           <strong>0</strong>
-         </div>
--        <div class="icon blue">👥</div>
--      </div>
-+        <div class="stat-icon blue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-+      </article>
- 
--      <div class="card">
-+      <article class="stat-card">
-         <div>
-           <span>Quartos Disponíveis</span>
-           <strong>10</strong>
-         </div>
--        <div class="icon green">🛏️</div>
--      </div>
-+        <div class="stat-icon green"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21v-8"/><path d="M21 21v-8"/><path d="M3 17h18"/><path d="M6 13V7h8a4 4 0 0 1 4 4v2"/><path d="M6 10h4"/></svg></div>
-+      </article>
- 
--      <div class="card">
-+      <article class="stat-card">
-         <div>
-           <span>Quartos Ocupados</span>
-           <strong>0</strong>
-         </div>
--        <div class="icon red">✅</div>
--      </div>
-+        <div class="stat-icon red"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-+      </article>
- 
--      <div class="card">
-+      <article class="stat-card">
-         <div>
-           <span>Reservas Ativas</span>
-           <strong>0</strong>
-         </div>
--        <div class="icon yellow">📅</div>
--      </div>
-+        <div class="stat-icon yellow"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg></div>
-+      </article>
-     </section>
- 
-     <section class="bottom-area">
--      <div class="panel">
-+      <article class="panel">
-         <h2>Ações Rápidas</h2>
- 
--        <a href="cadastro-hospedes.html" class="primary-button">
--          👥 Cadastrar Novo Hóspede
-+        <a href="cadastro-hospedes.html" class="action-button primary-button">
-+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-+          Cadastrar Novo Hóspede
-         </a>
- 
--        <a href="quartos.html" class="secondary-button">
--          🛏️ Ver Quartos Disponíveis
-+        <a href="quartos.html" class="action-button secondary-button">
-+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21v-8"/><path d="M21 21v-8"/><path d="M3 17h18"/><path d="M6 13V7h8a4 4 0 0 1 4 4v2"/><path d="M6 10h4"/></svg></span>
-+          Ver Quartos Disponíveis
-         </a>
--      </div>
-+      </article>
- 
--      <div class="panel">
-+      <article class="panel">
-         <h2>Últimas Reservas</h2>
-         <p>Nenhuma reserva cadastrada ainda</p>
--      </div>
-+      </article>
-     </section>
-   </main>
--
- </body>
- </html>
- 
-EOF
-)
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f6f8fb;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #0f172a;
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 255px;
+  background: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  padding: 24px 16px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 16px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #334155;
+  font-size: 16px;
+}
+
+.menu-item.active {
+  background: #eef4ff;
+  color: #2563eb;
+}
+
+.main {
+  padding: 38px 32px;
+  width: 760px;
+}
+
+.main h1 {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  color: #475569;
+  margin-bottom: 34px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 320px 320px;
+  gap: 24px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  height: 98px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.card p {
+  color: #334155;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.card strong {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blue {
+  background: #eef4ff;
+  color: #2563eb;
+}
+
+.green {
+  background: #ecfdf3;
+  color: #16a34a;
+}
+
+.red {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.yellow {
+  background: #fff7ed;
+  color: #f97316;
+}
+
+.bottom {
+  display: grid;
+  grid-template-columns: 320px 320px;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.panel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  min-height: 192px;
+  padding: 26px 24px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.panel h2 {
+  font-size: 20px;
+  margin-bottom: 22px;
+}
+
+.panel p {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.btn {
+  display: block;
+  padding: 15px;
+  border-radius: 10px;
+  text-decoration: none;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.primary {
+  background: #2563eb;
+  color: white;
+}
+
+.secondary {
+  background: #f1f5f9;
+  color: #334155;
+}
