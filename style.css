@@ -53,31 +53,6 @@ body {
   min-height: calc(100vh - 140px);
 }
 
-/* MENU LATERAL */
-.sidebar {
-  width: 255px;
-  background: #ffffff;
-  border-right: 1px solid #e2e8f0;
-  padding: 24px 16px;
-}
-
-.menu-item {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 15px 16px;
-  margin-bottom: 12px;
-  border-radius: 12px;
-  text-decoration: none;
-  color: #334155;
-  font-size: 16px;
-}
-
-.menu-item.active {
-  background: #eef4ff;
-  color: #2563eb;
-}
-
 /* CONTEÚDO */
 .main {
   flex: 1;
