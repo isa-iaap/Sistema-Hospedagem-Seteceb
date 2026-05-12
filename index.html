@@ -6,10 +6,10 @@
   <title>Sistema de Hospedagem SETECEB</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <body>
-
+  <!-- TOPO -->
   <header class="topo">
     <div>
       <h1>Sistema de Hospedagem SETECEB</h1>
@@ -17,32 +17,38 @@
     </div>
   </header>
 
+  <!-- MENU LATERAL -->
   <aside class="sidebar">
     <a class="menu-item active" href="index.html">⌂ <span>Início</span></a>
-    <a class="menu-item" href="cadastro-hospedes.html">♙ <span>Cadastrar Hóspede</span></a>
-    <a class="menu-item" href="reservas.html">▣ <span>Reservas</span></a>
-    <a class="menu-item" href="quartos.html">▤ <span>Quartos</span></a>
+
+    <a class="menu-item" href="cadastro-hospedes.html">
+      ♙ <span>Cadastrar Hóspede</span>
+    </a>
+
+    <a class="menu-item" href="reservas.html">
+      ▣ <span>Reservas</span>
+    </a>
+
+    <a class="menu-item" href="quartos.html">
+      ▤ <span>Quartos</span>
+    </a>
   </aside>
 
+  <!-- CONTEÚDO -->
   <main class="main">
 
-  <aside class="sidebar">
-    <a class="menu-item active" href="index.html">⌂ <span>Início</span></a>
-    <a class="menu-item" href="cadastro-hospedes.html">♙ <span>Cadastrar Hóspede</span></a>
-    <a class="menu-item" href="reservas.html">▣ <span>Reservas</span></a>
-    <a class="menu-item" href="quartos.html">▤ <span>Quartos</span></a>
-  </aside>
-
-  <main class="main">
     <h1>Painel de Controle</h1>
     <p class="subtitle">Visão geral do sistema de hospedagem</p>
 
+    <!-- CARDS -->
     <section class="grid">
+
       <div class="card">
         <div>
           <p>Total de Hóspedes</p>
           <strong>0</strong>
         </div>
+
         <span class="icon blue">♙</span>
       </div>
 
@@ -51,6 +57,7 @@
           <p>Quartos Disponíveis</p>
           <strong>10</strong>
         </div>
+
         <span class="icon green">▤</span>
       </div>
 
@@ -59,6 +66,7 @@
           <p>Quartos Ocupados</p>
           <strong>0</strong>
         </div>
+
         <span class="icon red">✓</span>
       </div>
 
@@ -67,22 +75,34 @@
           <p>Reservas Ativas</p>
           <strong>0</strong>
         </div>
+
         <span class="icon yellow">▣</span>
       </div>
+
     </section>
 
+    <!-- PARTE DE BAIXO -->
     <section class="bottom">
+
       <div class="panel">
         <h2>Ações Rápidas</h2>
-        <a class="btn primary" href="cadastro-hospedes.html">♙ Cadastrar Novo Hóspede</a>
-        <a class="btn secondary" href="quartos.html">▤ Ver Quartos Disponíveis</a>
+
+        <a class="btn primary" href="cadastro-hospedes.html">
+          ♙ Cadastrar Novo Hóspede
+        </a>
+
+        <a class="btn secondary" href="quartos.html">
+          ▤ Ver Quartos Disponíveis
+        </a>
       </div>
 
       <div class="panel">
         <h2>Últimas Reservas</h2>
         <p>Nenhuma reserva cadastrada ainda</p>
       </div>
+
     </section>
+
   </main>
 
 </body>
