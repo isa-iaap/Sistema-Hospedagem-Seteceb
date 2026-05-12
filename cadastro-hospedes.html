@@ -1,1 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Hóspedes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<div class="content">
+  <h1>Cadastro de Hóspedes</h1>
+
+  <form>
+    <label>Nome:</label><br>
+    <input type="text"><br><br>
+
+    <label>Telefone:</label><br>
+    <input type="text"><br><br>
+
+    <label>Data de Entrada:</label><br>
+    <input type="date"><br><br>
+
+    <label>Data de Saída:</label><br>
+    <input type="date"><br><br>
+
+    <label>Quarto:</label><br>
+    <select>
+      <option>Quarto 01</option>
+      <option>Quarto 02</option>
+      <option>Quarto 03</option>
+    </select><br><br>
+
+    <button type="button" onclick="salvarCadastro()">
+      Salvar Cadastro
+    </button>
+
+    <p id="mensagem"></p>
+  </form>
+</div>
+
+<script>
+function salvarCadastro() {
+  document.getElementById("mensagem").innerHTML =
+  "Reserva realizada com sucesso!";
+}
+</script>
+
+</body>
+</html>
