@@ -3,48 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro de Hóspedes</title>
+  <title>Cadastro de Hóspede</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="content">
-  <h1>Cadastro de Hóspedes</h1>
+  <aside class="sidebar">
+    <nav>
+      <a href="index.html">⌂ Início</a>
+      <a class="active" href="cadastro-hospedes.html">☷ Cadastrar Hóspede</a>
+      <a href="reservas.html">▣ Reservas</a>
+      <a href="quartos.html">▤ Quartos</a>
+    </nav>
+  </aside>
 
-  <form>
-    <label>Nome:</label><br>
-    <input type="text"><br><br>
+  <main class="content">
+    <h1>Cadastro de Hóspede</h1>
+    <p class="subtitle">Preencha os dados do hóspede e selecione o quarto</p>
 
-    <label>Telefone:</label><br>
-    <input type="text"><br><br>
+    <section class="form-card">
+      <form>
+        <label>Nome Completo</label>
+        <input type="text" placeholder="Digite o nome completo do hóspede">
 
-    <label>Data de Entrada:</label><br>
-    <input type="date"><br><br>
+        <label>Telefone</label>
+        <input type="text" placeholder="(00) 00000-0000">
 
-    <label>Data de Saída:</label><br>
-    <input type="date"><br><br>
+        <div class="form-row">
+          <div>
+            <label>Data de Entrada</label>
+            <input type="date">
+          </div>
 
-    <label>Quarto:</label><br>
-    <select>
-      <option>Quarto 01</option>
-      <option>Quarto 02</option>
-      <option>Quarto 03</option>
-    </select><br><br>
+          <div>
+            <label>Data de Saída</label>
+            <input type="date">
+          </div>
+        </div>
 
-    <button type="button" onclick="salvarCadastro()">
-      Salvar Cadastro
-    </button>
+        <label>Seleção de Quarto</label>
+        <select>
+          <option>Selecione um quarto</option>
+          <option>Quarto 01 - Disponível</option>
+          <option>Quarto 02 - Disponível</option>
+          <option>Quarto 03 - Reservado</option>
+        </select>
 
-    <p id="mensagem"></p>
-  </form>
-</div>
+        <div class="actions">
+          <button type="button" class="btn-primary" onclick="salvarCadastro()">
+            Salvar Cadastro
+          </button>
 
-<script>
-function salvarCadastro() {
-  document.getElementById("mensagem").innerHTML =
-  "Reserva realizada com sucesso!";
-}
-</script>
+          <button type="reset" class="btn-secondary">
+            Cancelar
+          </button>
+        </div>
+
+        <p id="mensagem" class="mensagem"></p>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    function salvarCadastro() {
+      document.getElementById("mensagem").innerHTML =
+      "Reserva realizada com sucesso!";
+    }
+  </script>
 
 </body>
 </html>
