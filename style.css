@@ -40,26 +40,23 @@ body {
   text-transform: uppercase;
   letter-spacing: 1.2px;
   font-weight: 600;
-  transition: 0.3s;
 }
 
 .menu-topo a:hover {
   color: #f59e0b;
 }
 
-/* LAYOUT */
+/* CONTEÚDO */
 .layout {
   display: flex;
   min-height: calc(100vh - 140px);
 }
 
-/* CONTEÚDO */
 .main {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 38px 32px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,30 +74,41 @@ body {
   text-align: center;
 }
 
-/* CARDS */
-.grid {
+/* HOME */
+.grid,
+.bottom {
   display: grid;
   grid-template-columns: repeat(2, 320px);
   gap: 24px;
   justify-content: center;
 }
 
-.card {
-  background: #ffffff;
+.bottom {
+  margin-top: 32px;
+}
+
+.card,
+.panel,
+.form-card,
+.reserva-card,
+.resumo-card {
+  background: white;
   border: 1px solid #e2e8f0;
   border-radius: 14px;
-  padding: 24px;
-  height: 100px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
 }
 
-.card p {
-  color: #475569;
+.card {
+  height: 100px;
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card p,
+.panel p {
+  color: #64748b;
   font-size: 14px;
   margin-bottom: 8px;
 }
@@ -114,13 +122,11 @@ body {
   width: 48px;
   height: 48px;
   border-radius: 12px;
-
+  background: #f1f5f9;
+  color: #0f172a;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background: #f1f5f9;
-  color: #0f172a;
 }
 
 .icon svg {
@@ -128,22 +134,9 @@ body {
   height: 24px;
 }
 
-/* PAINÉIS */
-.bottom {
-  display: grid;
-  grid-template-columns: repeat(2, 320px);
-  gap: 24px;
-  margin-top: 32px;
-}
-
 .panel {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
   min-height: 190px;
   padding: 24px;
-
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
 }
 
 .panel h2 {
@@ -151,37 +144,39 @@ body {
   margin-bottom: 20px;
 }
 
-.panel p {
-  color: #64748b;
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
 /* BOTÕES */
-.primary {
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
   background: #f1f5f9;
   color: #334155;
 }
 
-.primary:hover {
+.btn:hover,
+.primary:hover,
+.secondary:hover {
   background: #e2e8f0;
 }
+
+.primary,
+.secondary {
+  background: #f1f5f9;
+  color: #334155;
+}
+
 /* FORMULÁRIO */
 .form-card {
   width: 100%;
-  max-width: 1200px;
-
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 24px;
-
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
-
+  max-width: 620px;
   padding: 32px;
-
-  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.10);
 }
 
 .form-group {
@@ -199,13 +194,11 @@ body {
 .form-group select {
   width: 100%;
   padding: 14px;
-
   border: 1px solid #cbd5e1;
   border-radius: 10px;
-
   background: #f8fafc;
-
   font-size: 14px;
+  font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 .form-row {
@@ -224,41 +217,7 @@ body {
   margin-top: 18px;
   font-weight: 600;
   color: #16a34a;
-}
-
-/* TABELA */
-.tabela-valores {
-  width: 100%;
-
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-
-  padding: 20px;
-  margin-bottom: 24px;
-}
-
-.tabela-valores h3 {
-  font-size: 18px;
-  margin-bottom: 18px;
-}
-
-.tabela-valores table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.tabela-valores th,
-.tabela-valores td {
-  padding: 14px;
-  border-bottom: 1px solid #e2e8f0;
-  text-align: left;
-  font-size: 14px;
-}
-
-.tabela-valores th {
-  background: #f8fafc;
-  font-weight: 600;
+  text-align: center;
 }
 
 /* RESERVAS */
@@ -268,12 +227,9 @@ body {
 }
 
 .topo-reservas {
-  width: 100%;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   margin-bottom: 24px;
 }
 
@@ -281,19 +237,20 @@ body {
   width: 180px;
 }
 
-.reserva-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
+.resumo-reservas {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 12px;
+  padding: 16px 20px;
+  color: #2563eb;
+}
 
+.reserva-card {
   padding: 24px;
   margin-bottom: 20px;
-
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
-
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  gap: 24px;
 }
 
 .reserva-header {
@@ -310,10 +267,8 @@ body {
 .status-reserva {
   background: #fff7ed;
   color: #f97316;
-
   padding: 7px 12px;
   border-radius: 999px;
-
   font-size: 12px;
   font-weight: 600;
 }
@@ -336,67 +291,50 @@ body {
 }
 
 .sem-reservas {
-  background: #ffffff;
+  background: white;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
-
   padding: 24px;
-
   text-align: center;
   color: #64748b;
 }
 
 .btn-excluir {
   border: none;
-
   padding: 10px 14px;
   border-radius: 8px;
-
   background: #fee2e2;
   color: #dc2626;
-
   cursor: pointer;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 /* QUARTOS */
 .quartos-resumo {
   width: 100%;
   max-width: 920px;
-
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-
   gap: 18px;
   margin-bottom: 26px;
 }
 
 .resumo-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-
   padding: 18px;
-
   display: flex;
   align-items: center;
   gap: 14px;
-
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
 }
 
 .resumo-card span {
   width: 42px;
   height: 42px;
-
   border-radius: 10px;
-
   background: #f1f5f9;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-weight: 700;
 }
 
@@ -412,16 +350,15 @@ body {
 .quartos-lista {
   width: 100%;
   max-width: 920px;
-
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-
   gap: 18px;
 }
 
 .quarto-box {
   border-radius: 14px;
   padding: 22px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
 }
 
 .quarto-box h2 {
