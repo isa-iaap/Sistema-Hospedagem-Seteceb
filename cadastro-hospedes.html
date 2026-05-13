@@ -67,11 +67,17 @@
 
         <div class="form-group">
   <label>Quantidade de acompanhantes</label>
-  <input type="number" placeholder="Digite a quantidade">
+
+  <input
+    type="number"
+    id="quantidadeAcompanhantes"
+    min="0"
+    placeholder="Digite a quantidade"
+    onchange="criarCamposAcompanhantes()"
+  >
 </div>
 
-<div class="form-group">
-  <label>Nomes dos acompanhantes</label>
+<div id="camposAcompanhantes"></div>
 
   <textarea
     placeholder="Digite os nomes dos acompanhantes separados por linha">
