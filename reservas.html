@@ -10,6 +10,7 @@
 <body>
 
   <header class="topo">
+
     <div class="logo">
       <img
         src="https://static.wixstatic.com/media/ba5321_61740a2cd04d47279f1d99a928465122~mv2.png/v1/fill/w_221,h_63,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo%20SETECEB%20Branca.png"
@@ -23,12 +24,15 @@
       <a href="reservas.html">Reservas</a>
       <a href="quartos.html">Quartos</a>
     </nav>
+
   </header>
 
   <main class="main">
 
     <h1>Reservas</h1>
-    <p class="subtitle">Gerenciamento de hóspedes e reservas</p>
+    <p class="subtitle">
+      Gerenciamento de hóspedes e reservas
+    </p>
 
     <section class="reservas-area">
 
@@ -39,8 +43,15 @@
       <div id="listaReservas"></div>
 
       <div class="resumo-reservas">
-        <strong>Total de reservas: <span id="totalReservas">0</span></strong>
-        <p>Ativas: <span id="reservasAtivas">0</span></p>
+        <strong>
+          Total de reservas:
+          <span id="totalReservas">0</span>
+        </strong>
+
+        <p>
+          Ativas:
+          <span id="reservasAtivas">0</span>
+        </p>
       </div>
 
     </section>
@@ -48,60 +59,110 @@
   </main>
 
   <script>
-  function carregarReservas() {
-    const reservas = JSON.parse(localStorage.getItem("cadastros")) || [];
-    const lista = document.getElementById("listaReservas");
 
-    lista.innerHTML = "";
+    function carregarReservas() {
 
-    if (reservas.length === 0) {
-      lista.innerHTML = "<p>Nenhuma reserva cadastrada ainda.</p>";
-    }
+      const reservas =
+        JSON.parse(localStorage.getItem("cadastros")) || [];
 
-    reservas.forEach((reserva, index) => {
-      lista.innerHTML += `
-        <div class="reserva-card">
-          <div>
-            <h2>${reserva.responsavel}</h2>
-            <p>Telefone: ${reserva.telefone}</p>
-            <p>Quarto: ${reserva.quarto}</p>
-            <p>Check-in: ${reserva.entrada}</p>
-            <p>Check-out: ${reserva.saida}</p>
-            <p>Adultos: ${reserva.adultos || 0}</p>
-            <p>Crianças até 12 anos: ${reserva.criancas || 0}</p>
-            <p>Total de hóspedes: ${reserva.totalHospedes}</p>
+      const lista =
+        document.getElementById("listaReservas");
+
+      lista.innerHTML = "";
+
+      if (reservas.length === 0) {
+
+        lista.innerHTML =
+          "<p>Nenhuma reserva cadastrada ainda.</p>";
+      }
+
+      reservas.forEach((reserva, index) => {
+
+        lista.innerHTML += `
+
+          <div class="reserva-card">
+
+            <div>
+
+              <h2>${reserva.responsavel}</h2>
+
+              <p>
+                Telefone:
+                ${reserva.telefone}
+              </p>
+
+              <p>
+                Quarto:
+                ${reserva.quarto}
+              </p>
+
+              <p>
+                Check-in:
+                ${reserva.entrada}
+              </p>
+
+              <p>
+                Check-out:
+                ${reserva.saida}
+              </p>
+
+              <p>
+                Adultos:
+                ${reserva.adultos || 0}
+              </p>
+
+              <p>
+                Crianças até 12 anos:
+                ${reserva.criancas || 0}
+              </p>
+
+              <p>
+                Total de hóspedes:
+                ${reserva.totalHospedes}
+              </p>
+
+            </div>
+
+            <div class="acoes-reserva">
+
+              <button
+                onclick="verDetalhes(${index})"
+                class="btn-detalhes"
+              >
+                Ver detalhes
+              </button>
+
+              <button
+                onclick="excluirReserva(${index})"
+                class="btn-excluir"
+              >
+                Excluir
+              </button>
+
+            </div>
+
           </div>
 
-         <div class="acoes-reserva">
+        `;
+      });
 
-  <button onclick="verDetalhes(${index})" class="btn-detalhes">
-    Ver detalhes
-  </button>
+      document.getElementById("totalReservas").innerText =
+        reservas.length;
 
-  <button onclick="excluirReserva(${index})" class="btn-excluir">
-    Excluir
-  </button>
+      document.getElementById("reservasAtivas").innerText =
+        reservas.length;
+    }
 
-</div>
-        </div>
-      `;
-    });
-
-    document.getElementById("totalReservas").innerText = reservas.length;
-    document.getElementById("reservasAtivas").innerText = reservas.length;
-  }
-
-  carregarReservas();
     function verDetalhes(index) {
 
-  const reservas =
-    JSON.parse(localStorage.getItem("cadastros")) || [];
+      const reservas =
+        JSON.parse(localStorage.getItem("cadastros")) || [];
 
-  const reserva = reservas[index];
+      const reserva = reservas[index];
 
-  alert(
-    `
-Responsável: ${reserva.responsavel}
+      alert(
+
+`Responsável: ${reserva.responsavel}
 
 Telefone: ${reserva.telefone}
 
@@ -115,28 +176,29 @@ Adultos: ${reserva.adultos}
 
 Crianças: ${reserva.criancas}
 
-Total de hóspedes: ${reserva.totalHospedes}
-    `
-  );
-}
+Total de hóspedes: ${reserva.totalHospedes}`
 
-function excluirReserva(index) {
+      );
+    }
 
-  let reservas =
-    JSON.parse(localStorage.getItem("cadastros")) || [];
+    function excluirReserva(index) {
 
-  reservas.splice(index, 1);
+      let reservas =
+        JSON.parse(localStorage.getItem("cadastros")) || [];
 
-  localStorage.setItem(
-    "cadastros",
-    JSON.stringify(reservas)
-  );
+      reservas.splice(index, 1);
 
-  carregarReservas();
-}
-</script>
+      localStorage.setItem(
+        "cadastros",
+        JSON.stringify(reservas)
+      );
 
-  
+      carregarReservas();
+    }
+
+    carregarReservas();
+
+  </script>
 
 </body>
 </html>
