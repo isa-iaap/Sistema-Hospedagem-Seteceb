@@ -196,9 +196,10 @@ body {
   max-width: 620px;
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 28px;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+  border-radius: 16px;
+  padding: 32px;
+  margin-top: 10px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.10);
 }
 
 .form-group {
@@ -209,29 +210,23 @@ body {
 
 .form-row {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 18px;
 }
 
 .form-group label {
   font-weight: 600;
   margin-bottom: 8px;
-  color: #0f172a;
 }
 
 .form-group input,
 .form-group select {
+  width: 100%;
   padding: 14px;
   border: 1px solid #cbd5e1;
   border-radius: 10px;
   font-size: 14px;
-  font-family: 'Segoe UI', Arial, sans-serif;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-  outline: none;
-  border-color: #0f172a;
+  background: #f8fafc;
 }
 
 .form-buttons {
@@ -241,14 +236,7 @@ body {
 }
 
 .form-buttons .btn {
+  width: 100%;
   border: none;
   cursor: pointer;
-  width: 100%;
-}
-
-.mensagem {
-  margin-top: 16px;
-  text-align: center;
-  color: #16a34a;
-  font-weight: 600;
 }
