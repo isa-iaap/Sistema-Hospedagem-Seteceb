@@ -30,29 +30,32 @@
   <main class="main">
 
     <h1>Reservas</h1>
+
     <p class="subtitle">
-      Gerenciamento de hóspedes e reservas
+      Gerenciamento de reservas e hóspedes hospedados
     </p>
 
     <section class="reservas-area">
 
-      <a class="btn primary" href="cadastro-hospedes.html">
-        Nova Reserva
-      </a>
+      <div class="topo-reservas">
+
+        <div class="resumo-reservas">
+          <strong>
+            Reservas Ativas:
+            <span id="totalReservas">0</span>
+          </strong>
+        </div>
+
+        <a
+          class="btn primary"
+          href="cadastro-hospedes.html"
+        >
+          Nova Reserva
+        </a>
+
+      </div>
 
       <div id="listaReservas"></div>
-
-      <div class="resumo-reservas">
-        <strong>
-          Total de reservas:
-          <span id="totalReservas">0</span>
-        </strong>
-
-        <p>
-          Ativas:
-          <span id="reservasAtivas">0</span>
-        </p>
-      </div>
 
     </section>
 
@@ -70,10 +73,20 @@
 
       lista.innerHTML = "";
 
+      document.getElementById("totalReservas").innerText =
+        reservas.length;
+
       if (reservas.length === 0) {
 
-        lista.innerHTML =
-          "<p>Nenhuma reserva cadastrada ainda.</p>";
+        lista.innerHTML = `
+
+          <div class="sem-reservas">
+            Nenhuma reserva cadastrada ainda
+          </div>
+
+        `;
+
+        return;
       }
 
       reservas.forEach((reserva, index) => {
@@ -82,103 +95,81 @@
 
           <div class="reserva-card">
 
-            <div>
+            <div class="reserva-info">
 
-              <h2>${reserva.responsavel}</h2>
+              <div class="reserva-header">
 
-              <p>
-                Telefone:
-                ${reserva.telefone}
-              </p>
+                <h2>
+                  ${reserva.responsavel}
+                </h2>
 
-              <p>
-                Quarto:
-                ${reserva.quarto}
-              </p>
+                <span class="status-reserva">
+                  Reservado
+                </span>
 
-              <p>
-                Check-in:
-                ${reserva.entrada}
-              </p>
+              </div>
 
-              <p>
-                Check-out:
-                ${reserva.saida}
-              </p>
+              <div class="reserva-grid">
 
-              <p>
-                Adultos:
-                ${reserva.adultos || 0}
-              </p>
+                <div>
+                  <small>Telefone</small>
+                  <p>${reserva.telefone}</p>
+                </div>
 
-              <p>
-                Crianças até 12 anos:
-                ${reserva.criancas || 0}
-              </p>
+                <div>
+                  <small>Quarto</small>
+                  <p>${reserva.quarto}</p>
+                </div>
 
-              <p>
-                Total de hóspedes:
-                ${reserva.totalHospedes}
-              </p>
+                <div>
+                  <small>Check-in</small>
+                  <p>${reserva.entrada}</p>
+                </div>
+
+                <div>
+                  <small>Check-out</small>
+                  <p>${reserva.saida}</p>
+                </div>
+
+                <div>
+                  <small>Adultos</small>
+                  <p>${reserva.adultos || 0}</p>
+                </div>
+
+                <div>
+                  <small>Crianças</small>
+                  <p>${reserva.criancas || 0}</p>
+                </div>
+
+                <div>
+                  <small>Total de hóspedes</small>
+                  <p>${reserva.totalHospedes || 0}</p>
+                </div>
+
+                <div>
+                  <small>Valor total</small>
+                  <p>
+                    <strong>
+                      R$ ${reserva.valorTotal || "0,00"}
+                    </strong>
+                  </p>
+                </div>
+
+              </div>
 
             </div>
 
-            <div class="acoes-reserva">
-
-              <button
-                onclick="verDetalhes(${index})"
-                class="btn-detalhes"
-              >
-                Ver detalhes
-              </button>
-
-              <button
-                onclick="excluirReserva(${index})"
-                class="btn-excluir"
-              >
-                Excluir
-              </button>
-
-            </div>
+            <button
+              onclick="excluirReserva(${index})"
+              class="btn-excluir"
+            >
+              Excluir Reserva
+            </button>
 
           </div>
 
         `;
       });
-
-      document.getElementById("totalReservas").innerText =
-        reservas.length;
-
-      document.getElementById("reservasAtivas").innerText =
-        reservas.length;
-    }
-
-    function verDetalhes(index) {
-
-      const reservas =
-        JSON.parse(localStorage.getItem("cadastros")) || [];
-
-      const reserva = reservas[index];
-
-      alert(
-
-`Responsável: ${reserva.responsavel}
-
-Telefone: ${reserva.telefone}
-
-Quarto: ${reserva.quarto}
-
-Check-in: ${reserva.entrada}
-
-Check-out: ${reserva.saida}
-
-Adultos: ${reserva.adultos}
-
-Crianças: ${reserva.criancas}
-
-Total de hóspedes: ${reserva.totalHospedes}`
-
-      );
     }
 
     function excluirReserva(index) {
