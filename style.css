@@ -188,3 +188,67 @@ body {
   background: #f1f5f9;
   color: #334155;
 }
+
+/* cadastro de hospedes  */
+/* FORMULÁRIO */
+.form-card {
+  width: 100%;
+  max-width: 620px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #0f172a;
+}
+
+.form-group input,
+.form-group select {
+  padding: 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #0f172a;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.form-buttons .btn {
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.mensagem {
+  margin-top: 16px;
+  text-align: center;
+  color: #16a34a;
+  font-weight: 600;
+}
