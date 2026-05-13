@@ -1,118 +1,72 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quartos</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+/* QUARTOS */
+.quartos-resumo {
+  width: 100%;
+  max-width: 920px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 26px;
+}
 
-<body>
+.resumo-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
 
-  <header class="topo">
-    <div class="logo">
-      <img
-        src="https://static.wixstatic.com/media/ba5321_61740a2cd04d47279f1d99a928465122~mv2.png/v1/fill/w_221,h_63,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo%20SETECEB%20Branca.png"
-        alt="Logo SETECEB"
-      >
-    </div>
+.resumo-card span {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
 
-    <nav class="menu-topo">
-      <a href="index.html">Início</a>
-      <a href="cadastro-hospedes.html">Hóspedes</a>
-      <a href="reservas.html">Reservas</a>
-      <a href="quartos.html">Quartos</a>
-    </nav>
-  </header>
+.resumo-card p {
+  font-size: 14px;
+  color: #334155;
+}
 
-  <main class="main">
+.resumo-card strong {
+  font-size: 18px;
+}
 
-    <h1>Quartos</h1>
-    <p class="subtitle">Visualização dos quartos disponíveis e ocupados</p>
+.quartos-lista {
+  width: 100%;
+  max-width: 920px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
 
-    <section class="quartos-grid">
+.quarto-box {
+  background: #ecfdf3;
+  border: 1px solid #22c55e;
+  border-radius: 12px;
+  padding: 20px;
+}
 
-      <!-- APARTAMENTO 104 -->
-      <div class="quarto-card">
-        <div>
-          <h2>Apartamento 104</h2>
-          <p>Capacidade máxima: 6 pessoas</p>
-          <p>Tipo: Apartamento</p>
-        </div>
+.quarto-box h2 {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
 
-        <span class="status disponivel">
-          Disponível
-        </span>
-      </div>
+.quarto-box p {
+  font-size: 14px;
+  color: #334155;
+  margin-bottom: 8px;
+}
 
-      <!-- APARTAMENTO 105 -->
-      <div class="quarto-card">
-        <div>
-          <h2>Apartamento 105</h2>
-          <p>Capacidade máxima: 6 pessoas</p>
-          <p>Tipo: Apartamento</p>
-        </div>
-
-        <span class="status ocupado">
-          Ocupado
-        </span>
-      </div>
-
-      <!-- APARTAMENTO 106 -->
-      <div class="quarto-card">
-        <div>
-          <h2>Apartamento 106</h2>
-          <p>Capacidade máxima: 6 pessoas</p>
-          <p>Tipo: Apartamento</p>
-        </div>
-
-        <span class="status disponivel">
-          Disponível
-        </span>
-      </div>
-
-      <!-- SUÍTE 1 -->
-      <div class="quarto-card">
-        <div>
-          <h2>Suíte 1</h2>
-          <p>Capacidade máxima: 2 pessoas</p>
-          <p>Tipo: Suíte</p>
-        </div>
-
-        <span class="status disponivel">
-          Disponível
-        </span>
-      </div>
-
-      <!-- SUÍTE 2 -->
-      <div class="quarto-card">
-        <div>
-          <h2>Suíte 2</h2>
-          <p>Capacidade máxima: 2 pessoas</p>
-          <p>Tipo: Suíte</p>
-        </div>
-
-        <span class="status ocupado">
-          Ocupado
-        </span>
-      </div>
-
-      <!-- SUÍTE 3 -->
-      <div class="quarto-card">
-        <div>
-          <h2>Suíte 3</h2>
-          <p>Capacidade máxima: 2 pessoas</p>
-          <p>Tipo: Suíte</p>
-        </div>
-
-        <span class="status disponivel">
-          Disponível
-        </span>
-      </div>
-
-    </section>
-
-  </main>
-
-</body>
-</html>
+.quarto-box hr {
+  border: none;
+  border-top: 1px solid #bbf7d0;
+  margin: 14px 0;
+}
