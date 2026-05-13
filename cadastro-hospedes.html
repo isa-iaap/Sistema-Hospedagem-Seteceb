@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro de Hóspede</title>
+  <title>Reservas</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
   <header class="topo">
+
     <div class="logo">
       <img
         src="https://static.wixstatic.com/media/ba5321_61740a2cd04d47279f1d99a928465122~mv2.png/v1/fill/w_221,h_63,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo%20SETECEB%20Branca.png"
@@ -23,176 +24,171 @@
       <a href="reservas.html">Reservas</a>
       <a href="quartos.html">Quartos</a>
     </nav>
+
   </header>
 
   <main class="main">
 
-    <h1>Cadastro de Hóspede</h1>
-    <p class="subtitle">Cadastre o responsável, acompanhantes e dados da hospedagem</p>
+    <h1>Reservas</h1>
 
-    <section class="form-card">
-      <form>
+    <p class="subtitle">
+      Gerenciamento de reservas e hóspedes hospedados
+    </p>
 
-        <div class="form-group">
-          <label>Nome do responsável</label>
-          <input id="nomeResponsavel" type="text" placeholder="Digite o nome do responsável pela reserva">
+    <section class="reservas-area">
+
+      <div class="topo-reservas">
+
+        <div class="resumo-reservas">
+          <strong>
+            Reservas Ativas:
+            <span id="totalReservas">0</span>
+          </strong>
         </div>
 
-        <div class="form-group">
-          <label>Telefone</label>
-          <input id="telefone" type="text" placeholder="(00) 00000-0000">
-        </div>
+        <a
+          class="btn primary"
+          href="cadastro-hospedes.html"
+        >
+          Nova Reserva
+        </a>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label>Data de Entrada</label>
-            <input id="entrada" type="date">
-          </div>
+      </div>
 
-          <div class="form-group">
-            <label>Data de Saída</label>
-            <input id="saida" type="date">
-          </div>
-        </div>
+      <div id="listaReservas"></div>
 
-        <div class="form-group">
-          <label>Seleção de Quarto</label>
-
-          <select id="quarto">
-            <option value="">Selecione um quarto</option>
-            <option>Apartamento 104</option>
-            <option>Apartamento 105</option>
-            <option>Apartamento 106</option>
-            <option>Suíte 1</option>
-            <option>Suíte 2</option>
-            <option>Suíte 3</option>
-          </select>
-        </div>
-
-       <div class="form-row">
-
-  <div class="form-group">
-    <label>Quantidade de adultos</label>
-
-    <input
-      type="number"
-      id="quantidadeAdultos"
-      min="1"
-      max="6"
-      value="1"
-      oninput="criarCamposHospedes()"
-    >
-  </div>
-
-  <div class="form-group">
-    <label>Crianças até 12 anos</label>
-
-    <input
-      type="number"
-      id="quantidadeCriancas"
-      min="0"
-      max="6"
-      value="0"
-      oninput="criarCamposHospedes()"
-    >
-  </div>
-
-</div>
-
-<div id="camposHospedes"></div>
-
-        <div class="form-buttons">
-          <button type="button" class="btn primary" onclick="salvarCadastro()">
-            Salvar Cadastro
-          </button>
-
-          <button type="reset" class="btn secondary" onclick="limparAcompanhantes()">
-            Cancelar
-          </button>
-        </div>
-
-        <p id="mensagem" class="mensagem"></p>
-
-      </form>
     </section>
 
   </main>
 
   <script>
-    function criarCamposAcompanhantes() {
-      const quantidade = Number(document.getElementById("quantidadeAcompanhantes").value);
-      const container = document.getElementById("camposAcompanhantes");
 
-      container.innerHTML = "";
+    function carregarReservas() {
 
-      for (let i = 1; i <= quantidade; i++) {
-        container.innerHTML += `
-          <div class="form-group">
-            <label>Nome do acompanhante ${i}</label>
-            <input
-              type="text"
-              class="acompanhante"
-              placeholder="Digite o nome do acompanhante ${i}"
-            >
+      const reservas =
+        JSON.parse(localStorage.getItem("cadastros")) || [];
+
+      const lista =
+        document.getElementById("listaReservas");
+
+      lista.innerHTML = "";
+
+      document.getElementById("totalReservas").innerText =
+        reservas.length;
+
+      if (reservas.length === 0) {
+
+        lista.innerHTML = `
+
+          <div class="sem-reservas">
+            Nenhuma reserva cadastrada ainda
           </div>
+
         `;
+
+        return;
       }
-    }
 
-    function limparAcompanhantes() {
-      document.getElementById("camposAcompanhantes").innerHTML = "";
-      document.getElementById("mensagem").innerHTML = "";
-    }
+      reservas.forEach((reserva, index) => {
 
-    function salvarCadastro() {
-      const nome = document.getElementById("nomeResponsavel").value.trim();
-      const telefone = document.getElementById("telefone").value.trim();
-      const entrada = document.getElementById("entrada").value;
-      const saida = document.getElementById("saida").value;
-      const quarto = document.getElementById("quarto").value;
+        lista.innerHTML += `
 
-      const acompanhantesInputs = document.querySelectorAll(".acompanhante");
-      const acompanhantes = [];
+          <div class="reserva-card">
 
-      acompanhantesInputs.forEach(input => {
-        if (input.value.trim() !== "") {
-          acompanhantes.push(input.value.trim());
-        }
+            <div class="reserva-info">
+
+              <div class="reserva-header">
+
+                <h2>
+                  ${reserva.responsavel}
+                </h2>
+
+                <span class="status-reserva">
+                  Reservado
+                </span>
+
+              </div>
+
+              <div class="reserva-grid">
+
+                <div>
+                  <small>Telefone</small>
+                  <p>${reserva.telefone}</p>
+                </div>
+
+                <div>
+                  <small>Quarto</small>
+                  <p>${reserva.quarto}</p>
+                </div>
+
+                <div>
+                  <small>Check-in</small>
+                  <p>${reserva.entrada}</p>
+                </div>
+
+                <div>
+                  <small>Check-out</small>
+                  <p>${reserva.saida}</p>
+                </div>
+
+                <div>
+                  <small>Adultos</small>
+                  <p>${reserva.adultos || 0}</p>
+                </div>
+
+                <div>
+                  <small>Crianças</small>
+                  <p>${reserva.criancas || 0}</p>
+                </div>
+
+                <div>
+                  <small>Total de hóspedes</small>
+                  <p>${reserva.totalHospedes || 0}</p>
+                </div>
+
+                <div>
+                  <small>Valor total</small>
+                  <p>
+                    <strong>
+                      R$ ${reserva.valorTotal || "0,00"}
+                    </strong>
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+
+            <button
+              onclick="excluirReserva(${index})"
+              class="btn-excluir"
+            >
+              Excluir Reserva
+            </button>
+
+          </div>
+
+        `;
       });
-
-      const totalHospedes = 1 + acompanhantes.length;
-
-      if (nome === "" || telefone === "" || entrada === "" || saida === "" || quarto === "") {
-        document.getElementById("mensagem").innerHTML =
-          "Preencha todos os dados principais antes de salvar.";
-        return;
-      }
-
-      if (totalHospedes > 6) {
-        document.getElementById("mensagem").innerHTML =
-          "O limite máximo é de 6 hóspedes por hospedagem.";
-        return;
-      }
-
-      const cadastro = {
-        responsavel: nome,
-        telefone: telefone,
-        entrada: entrada,
-        saida: saida,
-        quarto: quarto,
-        acompanhantes: acompanhantes,
-        totalHospedes: totalHospedes
-      };
-
-      let cadastros = JSON.parse(localStorage.getItem("cadastros")) || [];
-
-      cadastros.push(cadastro);
-
-      localStorage.setItem("cadastros", JSON.stringify(cadastros));
-
-      document.getElementById("mensagem").innerHTML =
-        `Cadastro salvo com sucesso! Total de hóspedes: ${totalHospedes}`;
     }
+
+    function excluirReserva(index) {
+
+      let reservas =
+        JSON.parse(localStorage.getItem("cadastros")) || [];
+
+      reservas.splice(index, 1);
+
+      localStorage.setItem(
+        "cadastros",
+        JSON.stringify(reservas)
+      );
+
+      carregarReservas();
+    }
+
+    carregarReservas();
+
   </script>
 
 </body>
