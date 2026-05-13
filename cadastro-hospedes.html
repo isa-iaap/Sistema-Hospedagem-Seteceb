@@ -167,6 +167,23 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
 
       let cadastros = JSON.parse(localStorage.getItem("cadastros")) || [];
 
+      const conflito = cadastros.some(reserva => {
+  if (reserva.quarto !== quarto) {
+    return false;
+  }
+
+  const entradaExistente = new Date(reserva.entrada);
+  const saidaExistente = new Date(reserva.saida);
+
+  return dataEntrada < saidaExistente && dataSaida > entradaExistente;
+});
+
+if (conflito) {
+  document.getElementById("mensagem").innerHTML =
+    "Este quarto já está reservado nesse período.";
+  return;
+}
+
       cadastros.push(cadastro);
 
       localStorage.setItem("cadastros", JSON.stringify(cadastros));
