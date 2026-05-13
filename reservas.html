@@ -1,1 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
+<body>
+
+  <header class="topo">
+    <div class="logo">
+      <img
+        src="https://static.wixstatic.com/media/ba5321_61740a2cd04d47279f1d99a928465122~mv2.png/v1/fill/w_221,h_63,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo%20SETECEB%20Branca.png"
+        alt="Logo SETECEB"
+      >
+    </div>
+
+    <nav class="menu-topo">
+      <a href="index.html">Início</a>
+      <a href="cadastro-hospedes.html">Hóspedes</a>
+      <a href="reservas.html">Reservas</a>
+      <a href="quartos.html">Quartos</a>
+    </nav>
+  </header>
+
+  <main class="main">
+
+    <h1>Reservas</h1>
+    <p class="subtitle">Gerenciamento de hóspedes e reservas</p>
+
+    <section class="reservas-area">
+
+      <a class="btn primary" href="cadastro-hospedes.html">
+        Nova Reserva
+      </a>
+
+      <div id="listaReservas"></div>
+
+      <div class="resumo-reservas">
+        <strong>Total de reservas: <span id="totalReservas">0</span></strong>
+        <p>Ativas: <span id="reservasAtivas">0</span></p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    function carregarReservas() {
+      const reservas = JSON.parse(localStorage.getItem("cadastros")) || [];
+      const lista = document.getElementById("listaReservas");
+
+      lista.innerHTML = "";
+
+      if (reservas.length === 0) {
+        lista.innerHTML = "<p>Nenhuma reserva cadastrada ainda.</p>";
+      }
+
+      reservas.forEach((reserva) => {
+        lista.innerHTML += `
+          <div class="reserva-card">
+            <div>
+              <h2>${reserva.responsavel}</h2>
+              <p>Telefone: ${reserva.telefone}</p>
+              <p>Quarto: ${reserva.quarto}</p>
+              <p>Check-in: ${reserva.entrada}</p>
+              <p>Check-out: ${reserva.saida}</p>
+              <p>Total de hóspedes: ${reserva.totalHospedes}</p>
+              <p>Acompanhantes: ${reserva.acompanhantes.length > 0 ? reserva.acompanhantes.join(", ") : "Nenhum"}</p>
+            </div>
+
+            <span class="status">Reservado</span>
+          </div>
+        `;
+      });
+
+      document.getElementById("totalReservas").innerText = reservas.length;
+      document.getElementById("reservasAtivas").innerText = reservas.length;
+    }
+
+    carregarReservas();
+  </script>
+
+</body>
+</html>
