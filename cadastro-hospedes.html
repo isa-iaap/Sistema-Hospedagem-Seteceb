@@ -28,63 +28,70 @@
   <main class="main">
 
     <h1>Cadastro de Hóspede</h1>
-    <p class="subtitle">Preencha os dados do hóspede e selecione o quarto</p>
+    <p class="subtitle">Cadastre o responsável, acompanhantes e dados da hospedagem</p>
 
     <section class="form-card">
       <form>
 
         <div class="form-group">
-  <label>Nome Completo</label>
-  <input type="text" placeholder="Digite o nome completo do hóspede">
-</div>
+          <label>Nome do responsável</label>
+          <input id="nomeResponsavel" type="text" placeholder="Digite o nome do responsável pela reserva">
+        </div>
 
         <div class="form-group">
           <label>Telefone</label>
-          <input type="text" placeholder="(00) 00000-0000">
+          <input id="telefone" type="text" placeholder="(00) 00000-0000">
         </div>
 
         <div class="form-row">
           <div class="form-group">
             <label>Data de Entrada</label>
-            <input type="date">
+            <input id="entrada" type="date">
           </div>
 
           <div class="form-group">
             <label>Data de Saída</label>
-            <input type="date">
+            <input id="saida" type="date">
           </div>
         </div>
 
         <div class="form-group">
           <label>Seleção de Quarto</label>
-          <select>
-            <option>Selecione um quarto</option>
-            <option>Quarto 01 - Disponível</option>
-            <option>Quarto 02 - Disponível</option>
-            <option>Quarto 03 - Reservado</option>
+
+          <select id="quarto">
+            <option value="">Selecione um quarto</option>
+            <option>Apartamento 104</option>
+            <option>Apartamento 105</option>
+            <option>Apartamento 106</option>
+            <option>Suíte 1</option>
+            <option>Suíte 2</option>
+            <option>Suíte 3</option>
           </select>
         </div>
 
         <div class="form-group">
-  <label>Quantidade de acompanhantes</label>
+          <label>Quantidade de acompanhantes</label>
 
-  <input
-    type="number"
-    id="quantidadeAcompanhantes"
-    min="0"
-    placeholder="Digite a quantidade"
-    onchange="criarCamposAcompanhantes()"
-  >
-</div>
+          <input
+            type="number"
+            id="quantidadeAcompanhantes"
+            min="0"
+            max="5"
+            placeholder="Digite a quantidade de acompanhantes"
+            oninput="criarCamposAcompanhantes()"
+          >
 
-<div id="camposAcompanhantes"></div>
+          <small>O total máximo sugerido é 6 pessoas por hospedagem, contando o responsável.</small>
+        </div>
+
+        <div id="camposAcompanhantes"></div>
 
         <div class="form-buttons">
           <button type="button" class="btn primary" onclick="salvarCadastro()">
             Salvar Cadastro
           </button>
 
-          <button type="reset" class="btn secondary">
+          <button type="reset" class="btn secondary" onclick="limparAcompanhantes()">
             Cancelar
           </button>
         </div>
@@ -97,64 +104,81 @@
   </main>
 
   <script>
-  function criarCamposAcompanhantes() {
-    const quantidade = Number(document.getElementById("quantidadeAcompanhantes").value);
-    const container = document.getElementById("camposAcompanhantes");
+    function criarCamposAcompanhantes() {
+      const quantidade = Number(document.getElementById("quantidadeAcompanhantes").value);
+      const container = document.getElementById("camposAcompanhantes");
 
-    container.innerHTML = "";
+      container.innerHTML = "";
 
-    for (let i = 1; i <= quantidade; i++) {
-      container.innerHTML += `
-        <div class="form-group">
-          <label>Acompanhante ${i}</label>
-          <input
-            type="text"
-            class="acompanhante"
-            placeholder="Digite o nome do acompanhante ${i}"
-          >
-        </div>
-      `;
-    }
-  }
-
-  function salvarCadastro() {
-    const nome = document.querySelector('input[placeholder="Digite o nome completo do hóspede"]').value;
-    const telefone = document.querySelector('input[placeholder="(00) 00000-0000"]').value;
-    const entrada = document.querySelectorAll('input[type="date"]')[0].value;
-    const saida = document.querySelectorAll('input[type="date"]')[1].value;
-    const quarto = document.querySelector("select").value;
-
-    const acompanhantesInputs = document.querySelectorAll(".acompanhante");
-    const acompanhantes = [];
-
-    acompanhantesInputs.forEach(input => {
-      if (input.value.trim() !== "") {
-        acompanhantes.push(input.value.trim());
+      for (let i = 1; i <= quantidade; i++) {
+        container.innerHTML += `
+          <div class="form-group">
+            <label>Nome do acompanhante ${i}</label>
+            <input
+              type="text"
+              class="acompanhante"
+              placeholder="Digite o nome do acompanhante ${i}"
+            >
+          </div>
+        `;
       }
-    });
+    }
 
-    const totalHospedes = 1 + acompanhantes.length;
+    function limparAcompanhantes() {
+      document.getElementById("camposAcompanhantes").innerHTML = "";
+      document.getElementById("mensagem").innerHTML = "";
+    }
 
-    const cadastro = {
-      responsavel: nome,
-      telefone: telefone,
-      entrada: entrada,
-      saida: saida,
-      quarto: quarto,
-      acompanhantes: acompanhantes,
-      totalHospedes: totalHospedes
-    };
+    function salvarCadastro() {
+      const nome = document.getElementById("nomeResponsavel").value.trim();
+      const telefone = document.getElementById("telefone").value.trim();
+      const entrada = document.getElementById("entrada").value;
+      const saida = document.getElementById("saida").value;
+      const quarto = document.getElementById("quarto").value;
 
-    let cadastros = JSON.parse(localStorage.getItem("cadastros")) || [];
+      const acompanhantesInputs = document.querySelectorAll(".acompanhante");
+      const acompanhantes = [];
 
-    cadastros.push(cadastro);
+      acompanhantesInputs.forEach(input => {
+        if (input.value.trim() !== "") {
+          acompanhantes.push(input.value.trim());
+        }
+      });
 
-    localStorage.setItem("cadastros", JSON.stringify(cadastros));
+      const totalHospedes = 1 + acompanhantes.length;
 
-    document.getElementById("mensagem").innerHTML =
-      `Cadastro salvo com sucesso! Total de hóspedes: ${totalHospedes}`;
-  }
-</script>
+      if (nome === "" || telefone === "" || entrada === "" || saida === "" || quarto === "") {
+        document.getElementById("mensagem").innerHTML =
+          "Preencha todos os dados principais antes de salvar.";
+        return;
+      }
+
+      if (totalHospedes > 6) {
+        document.getElementById("mensagem").innerHTML =
+          "O limite máximo é de 6 hóspedes por hospedagem.";
+        return;
+      }
+
+      const cadastro = {
+        responsavel: nome,
+        telefone: telefone,
+        entrada: entrada,
+        saida: saida,
+        quarto: quarto,
+        acompanhantes: acompanhantes,
+        totalHospedes: totalHospedes
+      };
+
+      let cadastros = JSON.parse(localStorage.getItem("cadastros")) || [];
+
+      cadastros.push(cadastro);
+
+      localStorage.setItem("cadastros", JSON.stringify(cadastros));
+
+      document.getElementById("mensagem").innerHTML =
+        `Cadastro salvo com sucesso! Total de hóspedes: ${totalHospedes}`;
+    }
+  </script>
 
 </body>
 </html>
