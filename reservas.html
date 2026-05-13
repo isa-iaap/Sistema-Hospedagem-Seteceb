@@ -58,7 +58,7 @@
       lista.innerHTML = "<p>Nenhuma reserva cadastrada ainda.</p>";
     }
 
-    reservas.forEach((reserva) => {
+    reservas.forEach((reserva, index) => {
       lista.innerHTML += `
         <div class="reserva-card">
           <div>
@@ -72,7 +72,17 @@
             <p>Total de hóspedes: ${reserva.totalHospedes}</p>
           </div>
 
-          <span class="status">Reservado</span>
+         <div class="acoes-reserva">
+
+  <button onclick="verDetalhes(${index})" class="btn-detalhes">
+    Ver detalhes
+  </button>
+
+  <button onclick="excluirReserva(${index})" class="btn-excluir">
+    Excluir
+  </button>
+
+</div>
         </div>
       `;
     });
@@ -82,7 +92,51 @@
   }
 
   carregarReservas();
+    function verDetalhes(index) {
+
+  const reservas =
+    JSON.parse(localStorage.getItem("cadastros")) || [];
+
+  const reserva = reservas[index];
+
+  alert(
+    `
+Responsável: ${reserva.responsavel}
+
+Telefone: ${reserva.telefone}
+
+Quarto: ${reserva.quarto}
+
+Check-in: ${reserva.entrada}
+
+Check-out: ${reserva.saida}
+
+Adultos: ${reserva.adultos}
+
+Crianças: ${reserva.criancas}
+
+Total de hóspedes: ${reserva.totalHospedes}
+    `
+  );
+}
+
+function excluirReserva(index) {
+
+  let reservas =
+    JSON.parse(localStorage.getItem("cadastros")) || [];
+
+  reservas.splice(index, 1);
+
+  localStorage.setItem(
+    "cadastros",
+    JSON.stringify(reservas)
+  );
+
+  carregarReservas();
+}
 </script>
+
+  
 
 </body>
 </html>
