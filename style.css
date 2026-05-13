@@ -252,3 +252,57 @@ textarea {
   resize: vertical;
   font-family: 'Segoe UI', Arial, sans-serif;
 }
+
+/* RESERVAS */
+.reservas-area {
+  width: 100%;
+  max-width: 900px;
+}
+
+.reservas-area .btn {
+  width: 180px;
+  margin-left: auto;
+  margin-bottom: 24px;
+}
+
+.reserva-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.reserva-card h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.reserva-card p {
+  color: #334155;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.status {
+  height: fit-content;
+  background: #fff7ed;
+  color: #f97316;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.resumo-reservas {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 12px;
+  padding: 20px;
+  color: #2563eb;
+}
