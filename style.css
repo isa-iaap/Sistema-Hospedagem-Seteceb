@@ -379,3 +379,28 @@ textarea {
   border-top: 1px solid #bbf7d0;
   margin: 14px 0;
 }
+
+.acoes-reserva {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.btn-detalhes,
+.btn-excluir {
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-detalhes {
+  background: #2563eb;
+  color: white;
+}
+
+.btn-excluir {
+  background: #ef4444;
+  color: white;
+}
