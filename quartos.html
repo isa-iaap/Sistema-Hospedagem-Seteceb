@@ -32,7 +32,7 @@
         <span>✓</span>
         <div>
           <p>Disponíveis</p>
-          <strong>6</strong>
+          <strong id="quartosDisponiveis">0</strong>
         </div>
       </div>
 
@@ -40,7 +40,7 @@
         <span>◷</span>
         <div>
           <p>Reservados</p>
-          <strong>0</strong>
+          <strong id="quartosReservados">0</strong>
         </div>
       </div>
 
@@ -48,64 +48,60 @@
         <span>×</span>
         <div>
           <p>Ocupados</p>
-          <strong>0</strong>
+          <strong id="quartosOcupados">0</strong>
         </div>
       </div>
     </section>
 
-    <section class="quartos-lista">
-
-      <div class="quarto-box">
-        <h2>Apartamento 104</h2>
-        <p>Capacidade: até 6 pessoas</p>
-        <p>Tipo: Apartamento</p>
-        <hr>
-        <p>Status: <strong>Disponível</strong></p>
-      </div>
-
-      <div class="quarto-box">
-        <h2>Apartamento 105</h2>
-        <p>Capacidade: até 6 pessoas</p>
-        <p>Tipo: Apartamento</p>
-        <hr>
-        <p>Status: <strong>Disponível</strong></p>
-      </div>
-
-      <div class="quarto-box">
-        <h2>Apartamento 106</h2>
-        <p>Capacidade: até 6 pessoas</p>
-        <p>Tipo: Apartamento</p>
-        <hr>
-        <p>Status: <strong>Disponível</strong></p>
-      </div>
-
-      <div class="quarto-box">
-        <h2>Suíte 1</h2>
-        <p>Capacidade: até 4 pessoas</p>
-        <p>Tipo: Suíte</p>
-        <hr>
-        <p>Status: <strong>Disponível</strong></p>
-      </div>
-
-      <div class="quarto-box">
-        <h2>Suíte 2</h2>
-        <p>Capacidade: até 4 pessoas</p>
-        <p>Tipo: Suíte</p>
-        <hr>
-        <p>Status: <strong>Disponível</strong></p>
-      </div>
-
-      <div class="quarto-box">
-        <h2>Suíte 3</h2>
-        <p>Capacidade: até 4 pessoas</p>
-        <p>Tipo: Suíte</p>
-        <hr>
-        <p>Status: <strong>Disponível</strong></p>
-      </div>
-
-    </section>
+    <section class="quartos-lista" id="listaQuartos"></section>
 
   </main>
+
+  <script>
+    const quartos = [
+      { nome: "Apartamento 104", capacidade: "até 6 pessoas", tipo: "Apartamento" },
+      { nome: "Apartamento 105", capacidade: "até 6 pessoas", tipo: "Apartamento" },
+      { nome: "Apartamento 106", capacidade: "até 6 pessoas", tipo: "Apartamento" },
+      { nome: "Suíte 1", capacidade: "até 4 pessoas", tipo: "Suíte" },
+      { nome: "Suíte 2", capacidade: "até 4 pessoas", tipo: "Suíte" },
+      { nome: "Suíte 3", capacidade: "até 4 pessoas", tipo: "Suíte" }
+    ];
+
+    function carregarQuartos() {
+      const reservas = JSON.parse(localStorage.getItem("cadastros")) || [];
+      const lista = document.getElementById("listaQuartos");
+
+      lista.innerHTML = "";
+
+      let ocupados = 0;
+
+      quartos.forEach(quarto => {
+        const reserva = reservas.find(item => item.quarto === quarto.nome);
+        const estaOcupado = reserva !== undefined;
+
+        if (estaOcupado) {
+          ocupados++;
+        }
+
+        lista.innerHTML += `
+          <div class="quarto-box ${estaOcupado ? "quarto-ocupado" : "quarto-disponivel"}">
+            <h2>${quarto.nome}</h2>
+            <p>Capacidade: ${quarto.capacidade}</p>
+            <p>Tipo: ${quarto.tipo}</p>
+            <hr>
+            <p>Status: <strong>${estaOcupado ? "Ocupado" : "Disponível"}</strong></p>
+            ${estaOcupado ? `<p>Responsável: ${reserva.responsavel}</p>` : ""}
+          </div>
+        `;
+      });
+
+      document.getElementById("quartosDisponiveis").innerText = quartos.length - ocupados;
+      document.getElementById("quartosReservados").innerText = ocupados;
+      document.getElementById("quartosOcupados").innerText = ocupados;
+    }
+
+    carregarQuartos();
+  </script>
 
 </body>
 </html>
