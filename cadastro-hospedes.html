@@ -97,36 +97,62 @@
   </main>
 
   <script>
-  function salvarCadastro() {
-    document.getElementById("mensagem").innerHTML =
-    "Cadastro realizado com sucesso!";
-  }
-
   function criarCamposAcompanhantes() {
-
-    const quantidade =
-      document.getElementById("quantidadeAcompanhantes").value;
-
-    const container =
-      document.getElementById("camposAcompanhantes");
+    const quantidade = Number(document.getElementById("quantidadeAcompanhantes").value);
+    const container = document.getElementById("camposAcompanhantes");
 
     container.innerHTML = "";
 
     for (let i = 1; i <= quantidade; i++) {
-
       container.innerHTML += `
-
         <div class="form-group">
           <label>Acompanhante ${i}</label>
-
           <input
             type="text"
+            class="acompanhante"
             placeholder="Digite o nome do acompanhante ${i}"
           >
         </div>
-
       `;
     }
+  }
+
+  function salvarCadastro() {
+    const nome = document.querySelector('input[placeholder="Digite o nome completo do hóspede"]').value;
+    const telefone = document.querySelector('input[placeholder="(00) 00000-0000"]').value;
+    const entrada = document.querySelectorAll('input[type="date"]')[0].value;
+    const saida = document.querySelectorAll('input[type="date"]')[1].value;
+    const quarto = document.querySelector("select").value;
+
+    const acompanhantesInputs = document.querySelectorAll(".acompanhante");
+    const acompanhantes = [];
+
+    acompanhantesInputs.forEach(input => {
+      if (input.value.trim() !== "") {
+        acompanhantes.push(input.value.trim());
+      }
+    });
+
+    const totalHospedes = 1 + acompanhantes.length;
+
+    const cadastro = {
+      responsavel: nome,
+      telefone: telefone,
+      entrada: entrada,
+      saida: saida,
+      quarto: quarto,
+      acompanhantes: acompanhantes,
+      totalHospedes: totalHospedes
+    };
+
+    let cadastros = JSON.parse(localStorage.getItem("cadastros")) || [];
+
+    cadastros.push(cadastro);
+
+    localStorage.setItem("cadastros", JSON.stringify(cadastros));
+
+    document.getElementById("mensagem").innerHTML =
+      `Cadastro salvo com sucesso! Total de hóspedes: ${totalHospedes}`;
   }
 </script>
 
