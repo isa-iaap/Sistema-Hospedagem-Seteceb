@@ -102,11 +102,38 @@
   </main>
 
   <script>
-    function salvarCadastro() {
-      document.getElementById("mensagem").innerHTML =
-      "Cadastro realizado com sucesso!";
+  function salvarCadastro() {
+    document.getElementById("mensagem").innerHTML =
+    "Cadastro realizado com sucesso!";
+  }
+
+  function criarCamposAcompanhantes() {
+
+    const quantidade =
+      document.getElementById("quantidadeAcompanhantes").value;
+
+    const container =
+      document.getElementById("camposAcompanhantes");
+
+    container.innerHTML = "";
+
+    for (let i = 1; i <= quantidade; i++) {
+
+      container.innerHTML += `
+
+        <div class="form-group">
+          <label>Acompanhante ${i}</label>
+
+          <input
+            type="text"
+            placeholder="Digite o nome do acompanhante ${i}"
+          >
+        </div>
+
+      `;
     }
-  </script>
+  }
+</script>
 
 </body>
 </html>
