@@ -198,7 +198,11 @@ body {
 /* FORMULÁRIO */
 .form-card {
   width: 100%;
-  max-width: 720px;
+  max-width: 1200px;
+
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
 
   background: #ffffff;
   border: 1px solid #e2e8f0;
