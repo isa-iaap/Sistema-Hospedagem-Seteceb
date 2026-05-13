@@ -48,40 +48,41 @@
   </main>
 
   <script>
-    function carregarReservas() {
-      const reservas = JSON.parse(localStorage.getItem("cadastros")) || [];
-      const lista = document.getElementById("listaReservas");
+  function carregarReservas() {
+    const reservas = JSON.parse(localStorage.getItem("cadastros")) || [];
+    const lista = document.getElementById("listaReservas");
 
-      lista.innerHTML = "";
+    lista.innerHTML = "";
 
-      if (reservas.length === 0) {
-        lista.innerHTML = "<p>Nenhuma reserva cadastrada ainda.</p>";
-      }
-
-      reservas.forEach((reserva) => {
-        lista.innerHTML += `
-          <div class="reserva-card">
-            <div>
-              <h2>${reserva.responsavel}</h2>
-              <p>Telefone: ${reserva.telefone}</p>
-              <p>Quarto: ${reserva.quarto}</p>
-              <p>Check-in: ${reserva.entrada}</p>
-              <p>Check-out: ${reserva.saida}</p>
-              <p>Total de hóspedes: ${reserva.totalHospedes}</p>
-              <p>Acompanhantes: ${reserva.acompanhantes.length > 0 ? reserva.acompanhantes.join(", ") : "Nenhum"}</p>
-            </div>
-
-            <span class="status">Reservado</span>
-          </div>
-        `;
-      });
-
-      document.getElementById("totalReservas").innerText = reservas.length;
-      document.getElementById("reservasAtivas").innerText = reservas.length;
+    if (reservas.length === 0) {
+      lista.innerHTML = "<p>Nenhuma reserva cadastrada ainda.</p>";
     }
 
-    carregarReservas();
-  </script>
+    reservas.forEach((reserva) => {
+      lista.innerHTML += `
+        <div class="reserva-card">
+          <div>
+            <h2>${reserva.responsavel}</h2>
+            <p>Telefone: ${reserva.telefone}</p>
+            <p>Quarto: ${reserva.quarto}</p>
+            <p>Check-in: ${reserva.entrada}</p>
+            <p>Check-out: ${reserva.saida}</p>
+            <p>Adultos: ${reserva.adultos || 0}</p>
+            <p>Crianças até 12 anos: ${reserva.criancas || 0}</p>
+            <p>Total de hóspedes: ${reserva.totalHospedes}</p>
+          </div>
+
+          <span class="status">Reservado</span>
+        </div>
+      `;
+    });
+
+    document.getElementById("totalReservas").innerText = reservas.length;
+    document.getElementById("reservasAtivas").innerText = reservas.length;
+  }
+
+  carregarReservas();
+</script>
 
 </body>
 </html>
