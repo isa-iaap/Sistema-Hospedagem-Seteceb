@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reservas</title>
+  <title>Cadastro de Hóspede</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -29,33 +29,150 @@
 
   <main class="main">
 
-    <h1>Reservas</h1>
+    <h1>Cadastro de Hóspede</h1>
 
     <p class="subtitle">
-      Gerenciamento de reservas e hóspedes hospedados
+      Cadastre o responsável e os dados da hospedagem
     </p>
 
-    <section class="reservas-area">
+    <section class="form-card">
 
-      <div class="topo-reservas">
+      <form>
 
-        <div class="resumo-reservas">
-          <strong>
-            Reservas Ativas:
-            <span id="totalReservas">0</span>
-          </strong>
+        <div class="form-group">
+          <label>Nome do responsável</label>
+
+          <input
+            id="nomeResponsavel"
+            type="text"
+            placeholder="Digite o nome do responsável"
+          >
         </div>
 
-        <a
-          class="btn primary"
-          href="cadastro-hospedes.html"
-        >
-          Nova Reserva
-        </a>
+        <div class="form-group">
+          <label>Telefone</label>
 
-      </div>
+          <input
+            id="telefone"
+            type="text"
+            placeholder="(00) 00000-0000"
+          >
+        </div>
 
-      <div id="listaReservas"></div>
+        <div class="form-row">
+
+          <div class="form-group">
+            <label>Data de Entrada</label>
+
+            <input
+              id="entrada"
+              type="date"
+            >
+          </div>
+
+          <div class="form-group">
+            <label>Data de Saída</label>
+
+            <input
+              id="saida"
+              type="date"
+            >
+          </div>
+
+        </div>
+
+        <div class="form-group">
+
+          <label>Seleção de Quarto</label>
+
+          <select id="quarto">
+
+            <option value="">
+              Selecione um quarto
+            </option>
+
+            <option>
+              Apartamento 104
+            </option>
+
+            <option>
+              Apartamento 105
+            </option>
+
+            <option>
+              Apartamento 106
+            </option>
+
+            <option>
+              Suíte 1
+            </option>
+
+            <option>
+              Suíte 2
+            </option>
+
+            <option>
+              Suíte 3
+            </option>
+
+          </select>
+
+        </div>
+
+        <div class="form-row">
+
+          <div class="form-group">
+
+            <label>Quantidade de adultos</label>
+
+            <input
+              type="number"
+              id="quantidadeAdultos"
+              min="1"
+              max="6"
+              value="1"
+            >
+
+          </div>
+
+          <div class="form-group">
+
+            <label>Crianças até 12 anos</label>
+
+            <input
+              type="number"
+              id="quantidadeCriancas"
+              min="0"
+              max="6"
+              value="0"
+            >
+
+          </div>
+
+        </div>
+
+        <div class="form-buttons">
+
+          <button
+            type="button"
+            class="btn primary"
+            onclick="salvarCadastro()"
+          >
+            Salvar Cadastro
+          </button>
+
+          <button
+            type="reset"
+            class="btn secondary"
+          >
+            Cancelar
+          </button>
+
+        </div>
+
+        <p id="mensagem" class="mensagem"></p>
+
+      </form>
 
     </section>
 
@@ -63,131 +180,98 @@
 
   <script>
 
-    function carregarReservas() {
+    function salvarCadastro() {
 
-      const reservas =
-        JSON.parse(localStorage.getItem("cadastros")) || [];
+      const nome =
+        document.getElementById("nomeResponsavel").value.trim();
 
-      const lista =
-        document.getElementById("listaReservas");
+      const telefone =
+        document.getElementById("telefone").value.trim();
 
-      lista.innerHTML = "";
+      const entrada =
+        document.getElementById("entrada").value;
 
-      document.getElementById("totalReservas").innerText =
-        reservas.length;
+      const saida =
+        document.getElementById("saida").value;
 
-      if (reservas.length === 0) {
+      const quarto =
+        document.getElementById("quarto").value;
 
-        lista.innerHTML = `
+      const adultos =
+        Number(document.getElementById("quantidadeAdultos").value);
 
-          <div class="sem-reservas">
-            Nenhuma reserva cadastrada ainda
-          </div>
+      const criancas =
+        Number(document.getElementById("quantidadeCriancas").value);
 
-        `;
+      const totalHospedes =
+        adultos + criancas;
+
+      if (
+        nome === "" ||
+        telefone === "" ||
+        entrada === "" ||
+        saida === "" ||
+        quarto === ""
+      ) {
+
+        document.getElementById("mensagem").innerHTML =
+          "Preencha todos os campos.";
 
         return;
       }
 
-      reservas.forEach((reserva, index) => {
+      if (totalHospedes > 6) {
 
-        lista.innerHTML += `
+        document.getElementById("mensagem").innerHTML =
+          "O limite máximo é de 6 hóspedes.";
 
-          <div class="reserva-card">
+        return;
+      }
 
-            <div class="reserva-info">
+      let valorAdulto = 120;
+      let valorCrianca = valorAdulto / 2;
 
-              <div class="reserva-header">
+      let valorTotal =
+        (adultos * valorAdulto) +
+        (criancas * valorCrianca);
 
-                <h2>
-                  ${reserva.responsavel}
-                </h2>
+      const cadastro = {
 
-                <span class="status-reserva">
-                  Reservado
-                </span>
+        responsavel: nome,
 
-              </div>
+        telefone: telefone,
 
-              <div class="reserva-grid">
+        entrada: entrada,
 
-                <div>
-                  <small>Telefone</small>
-                  <p>${reserva.telefone}</p>
-                </div>
+        saida: saida,
 
-                <div>
-                  <small>Quarto</small>
-                  <p>${reserva.quarto}</p>
-                </div>
+        quarto: quarto,
 
-                <div>
-                  <small>Check-in</small>
-                  <p>${reserva.entrada}</p>
-                </div>
+        adultos: adultos,
 
-                <div>
-                  <small>Check-out</small>
-                  <p>${reserva.saida}</p>
-                </div>
+        criancas: criancas,
 
-                <div>
-                  <small>Adultos</small>
-                  <p>${reserva.adultos || 0}</p>
-                </div>
+        totalHospedes: totalHospedes,
 
-                <div>
-                  <small>Crianças</small>
-                  <p>${reserva.criancas || 0}</p>
-                </div>
+        valorTotal:
+          valorTotal.toFixed(2).replace(".", ",")
 
-                <div>
-                  <small>Total de hóspedes</small>
-                  <p>${reserva.totalHospedes || 0}</p>
-                </div>
+      };
 
-                <div>
-                  <small>Valor total</small>
-                  <p>
-                    <strong>
-                      R$ ${reserva.valorTotal || "0,00"}
-                    </strong>
-                  </p>
-                </div>
-
-              </div>
-
-            </div>
-
-            <button
-              onclick="excluirReserva(${index})"
-              class="btn-excluir"
-            >
-              Excluir Reserva
-            </button>
-
-          </div>
-
-        `;
-      });
-    }
-
-    function excluirReserva(index) {
-
-      let reservas =
+      let cadastros =
         JSON.parse(localStorage.getItem("cadastros")) || [];
 
-      reservas.splice(index, 1);
+      cadastros.push(cadastro);
 
       localStorage.setItem(
         "cadastros",
-        JSON.stringify(reservas)
+        JSON.stringify(cadastros)
       );
 
-      carregarReservas();
-    }
+      document.getElementById("mensagem").innerHTML =
+        `Cadastro salvo com sucesso! Total de hóspedes: ${totalHospedes}`;
 
-    carregarReservas();
+    }
 
   </script>
 
