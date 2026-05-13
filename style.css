@@ -306,3 +306,54 @@ textarea {
   padding: 20px;
   color: #2563eb;
 }
+
+/* QUARTOS */
+.quartos-grid {
+  width: 100%;
+  max-width: 900px;
+
+  display: grid;
+  gap: 20px;
+}
+
+.quarto-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 24px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.quarto-card h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.quarto-card p {
+  color: #475569;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+/* STATUS */
+.status {
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.disponivel {
+  background: #ecfdf3;
+  color: #16a34a;
+}
+
+.ocupado {
+  background: #fef2f2;
+  color: #dc2626;
+}
