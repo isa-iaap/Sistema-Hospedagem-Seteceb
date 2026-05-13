@@ -382,12 +382,14 @@ textarea {
 
 .acoes-reserva {
   display: flex;
+  flex-direction: column;
   gap: 10px;
-  margin-top: 18px;
+  align-items: flex-end;
 }
 
 .btn-detalhes,
 .btn-excluir {
+  width: 120px;
   border: none;
   padding: 10px 14px;
   border-radius: 8px;
@@ -396,11 +398,11 @@ textarea {
 }
 
 .btn-detalhes {
-  background: #2563eb;
-  color: white;
+  background: #f1f5f9;
+  color: #0f172a;
 }
 
 .btn-excluir {
-  background: #ef4444;
-  color: white;
+  background: #fee2e2;
+  color: #dc2626;
 }
