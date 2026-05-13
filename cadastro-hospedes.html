@@ -10,7 +10,6 @@
 <body>
 
   <header class="topo">
-
     <div class="logo">
       <img
         src="https://static.wixstatic.com/media/ba5321_61740a2cd04d47279f1d99a928465122~mv2.png/v1/fill/w_221,h_63,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo%20SETECEB%20Branca.png"
@@ -24,16 +23,12 @@
       <a href="reservas.html">Reservas</a>
       <a href="quartos.html">Quartos</a>
     </nav>
-
   </header>
 
   <main class="main">
 
     <h1>Cadastro de Hóspede</h1>
-
-    <p class="subtitle">
-      Cadastre o responsável e os dados da hospedagem
-    </p>
+    <p class="subtitle">Cadastre o responsável e os dados da hospedagem</p>
 
     <section class="form-card">
 
@@ -41,164 +36,106 @@
 
         <div class="form-group">
           <label>Nome do responsável</label>
-
-          <input
-            id="nomeResponsavel"
-            type="text"
-            placeholder="Digite o nome do responsável"
-          >
+          <input id="nomeResponsavel" type="text" placeholder="Digite o nome do responsável">
         </div>
 
         <div class="form-group">
           <label>Telefone</label>
-
-          <input
-            id="telefone"
-            type="text"
-            placeholder="(00) 00000-0000"
-          >
+          <input id="telefone" type="text" placeholder="(00) 00000-0000">
         </div>
 
         <div class="form-row">
-
           <div class="form-group">
             <label>Data de Entrada</label>
-
-            <input
-              id="entrada"
-              type="date"
-            >
+            <input id="entrada" type="date">
           </div>
 
           <div class="form-group">
             <label>Data de Saída</label>
-
-            <input
-              id="saida"
-              type="date"
-            >
+            <input id="saida" type="date">
           </div>
-
         </div>
 
         <div class="form-group">
-
           <label>Seleção de Quarto</label>
 
           <select id="quarto">
-
-            <option value="">
-              Selecione um quarto
-            </option>
-
-            <option>
-              Apartamento 104
-            </option>
-
-            <option>
-              Apartamento 105
-            </option>
-
-            <option>
-              Apartamento 106
-            </option>
-
-            <option>
-              Suíte 1
-            </option>
-
-            <option>
-              Suíte 2
-            </option>
-
-            <option>
-              Suíte 3
-            </option>
-
+            <option value="">Selecione um quarto</option>
+            <option>Apartamento 104</option>
+            <option>Apartamento 105</option>
+            <option>Apartamento 106</option>
+            <option>Suíte 1</option>
+            <option>Suíte 2</option>
+            <option>Suíte 3</option>
           </select>
-
         </div>
 
-      
-<div class="tabela-valores">
+        <div class="tabela-valores">
+          <h3>Tabela de Valores por Diária</h3>
 
-  <h3>Tabela de Valores por Diária</h3>
+          <table>
+            <tr>
+              <th>Hospedagem</th>
+              <th>Valor da diária</th>
+            </tr>
 
-  <table>
+            <tr>
+              <td>Individual</td>
+              <td>R$ 120,00</td>
+            </tr>
 
-    <tr>
-      <th>Hospedagem</th>
-      <th>Valor da diária</th>
-    </tr>
+            <tr>
+              <td>Duplo</td>
+              <td>R$ 174,00</td>
+            </tr>
 
-    <tr>
-      <td>Adulto</td>
-      <td>R$ 120,00</td>
-    </tr>
+            <tr>
+              <td>Triplo</td>
+              <td>R$ 230,00</td>
+            </tr>
 
-    <tr>
-      <td>Criança até 12 anos</td>
-      <td>R$ 60,00</td>
-    </tr>
+            <tr>
+              <td>Quádruplo</td>
+              <td>R$ 280,00</td>
+            </tr>
 
-    <tr>
-      <td>Kit roupa de cama</td>
-      <td>R$ 50,00</td>
-    </tr>
+            <tr>
+              <td>Quíntuplo ou até 6 pessoas</td>
+              <td>R$ 336,00</td>
+            </tr>
 
-  </table>
+            <tr>
+              <td>Criança até 12 anos</td>
+              <td>50% do valor adulto</td>
+            </tr>
 
-</div>
+            <tr>
+              <td>Kit roupa de cama</td>
+              <td>R$ 50,00</td>
+            </tr>
+          </table>
+        </div>
 
         <div class="form-row">
-
           <div class="form-group">
-
             <label>Quantidade de adultos</label>
-
-            <input
-              type="number"
-              id="quantidadeAdultos"
-              min="1"
-              max="6"
-              value="1"
-            >
-
+            <input type="number" id="quantidadeAdultos" min="1" max="6" value="1">
           </div>
 
           <div class="form-group">
-
             <label>Crianças até 12 anos</label>
-
-            <input
-              type="number"
-              id="quantidadeCriancas"
-              min="0"
-              max="6"
-              value="0"
-            >
-
+            <input type="number" id="quantidadeCriancas" min="0" max="6" value="0">
           </div>
-
         </div>
 
         <div class="form-buttons">
-
-          <button
-            type="button"
-            class="btn primary"
-            onclick="salvarCadastro()"
-          >
+          <button type="button" class="btn primary" onclick="salvarCadastro()">
             Salvar Cadastro
           </button>
 
-          <button
-            type="reset"
-            class="btn secondary"
-          >
+          <button type="reset" class="btn secondary">
             Cancelar
           </button>
-
         </div>
 
         <p id="mensagem" class="mensagem"></p>
@@ -210,137 +147,79 @@
   </main>
 
   <script>
-
     function salvarCadastro() {
+      const nome = document.getElementById("nomeResponsavel").value.trim();
+      const telefone = document.getElementById("telefone").value.trim();
+      const entrada = document.getElementById("entrada").value;
+      const saida = document.getElementById("saida").value;
+      const quarto = document.getElementById("quarto").value;
 
-      const nome =
-        document.getElementById("nomeResponsavel").value.trim();
+      const adultos = Number(document.getElementById("quantidadeAdultos").value);
+      const criancas = Number(document.getElementById("quantidadeCriancas").value);
 
-      const telefone =
-        document.getElementById("telefone").value.trim();
+      const totalHospedes = adultos + criancas;
 
-      const entrada =
-        document.getElementById("entrada").value;
-
-      const saida =
-        document.getElementById("saida").value;
-
-      const quarto =
-        document.getElementById("quarto").value;
-
-      const adultos =
-        Number(document.getElementById("quantidadeAdultos").value);
-
-      const criancas =
-        Number(document.getElementById("quantidadeCriancas").value);
-
-      const totalHospedes =
-        adultos + criancas;
-
-      if (
-        nome === "" ||
-        telefone === "" ||
-        entrada === "" ||
-        saida === "" ||
-        quarto === ""
-      ) {
-
-        document.getElementById("mensagem").innerHTML =
-          "Preencha todos os campos.";
-
+      if (nome === "" || telefone === "" || entrada === "" || saida === "" || quarto === "") {
+        document.getElementById("mensagem").innerHTML = "Preencha todos os campos.";
         return;
       }
 
       if (totalHospedes > 6) {
-
-        document.getElementById("mensagem").innerHTML =
-          "O limite máximo é de 6 hóspedes.";
-
+        document.getElementById("mensagem").innerHTML = "O limite máximo é de 6 hóspedes.";
         return;
       }
 
-     /* TABELA DE VALORES */
-.tabela-valores {
-  width: 100%;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 24px;
-}
+      let valorDiaria = 0;
 
-.tabela-valores h3 {
-  font-size: 18px;
-  margin-bottom: 18px;
-}
+      if (totalHospedes === 1) {
+        valorDiaria = 120;
+      } else if (totalHospedes === 2) {
+        valorDiaria = 174;
+      } else if (totalHospedes === 3) {
+        valorDiaria = 230;
+      } else if (totalHospedes === 4) {
+        valorDiaria = 280;
+      } else if (totalHospedes >= 5) {
+        valorDiaria = 336;
+      }
 
-.tabela-valores table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.tabela-valores th,
-.tabela-valores td {
-  padding: 14px;
-  border-bottom: 1px solid #e2e8f0;
-  text-align: left;
-  font-size: 14px;
-}
-
-.tabela-valores th {
-  background: #f8fafc;
-  font-weight: 600;
-}
       const dataEntrada = new Date(entrada);
-const dataSaida = new Date(saida);
+      const dataSaida = new Date(saida);
 
-const diferencaTempo =
-  dataSaida - dataEntrada;
+      const quantidadeDiarias =
+        (dataSaida - dataEntrada) / (1000 * 60 * 60 * 24);
 
-const quantidadeDiarias =
-  diferencaTempo / (1000 * 60 * 60 * 24);
+      if (quantidadeDiarias <= 0) {
+        document.getElementById("mensagem").innerHTML =
+          "A data de saída precisa ser depois da data de entrada.";
+        return;
+      }
 
-const valorTotal =
-  valorDiaria * quantidadeDiarias;
-      
+      const valorTotal = valorDiaria * quantidadeDiarias;
+
       const cadastro = {
-
         responsavel: nome,
-
         telefone: telefone,
-
         entrada: entrada,
-
         saida: saida,
-
         quarto: quarto,
-
         adultos: adultos,
-
         criancas: criancas,
-
         totalHospedes: totalHospedes,
-
-        valorTotal:
-          valorTotal.toFixed(2).replace(".", ",")
-
+        quantidadeDiarias: quantidadeDiarias,
+        valorDiaria: valorDiaria.toFixed(2).replace(".", ","),
+        valorTotal: valorTotal.toFixed(2).replace(".", ",")
       };
 
-      let cadastros =
-        JSON.parse(localStorage.getItem("cadastros")) || [];
+      let cadastros = JSON.parse(localStorage.getItem("cadastros")) || [];
 
       cadastros.push(cadastro);
 
-      localStorage.setItem(
-        "cadastros",
-        JSON.stringify(cadastros)
-      );
+      localStorage.setItem("cadastros", JSON.stringify(cadastros));
 
       document.getElementById("mensagem").innerHTML =
         `Cadastro salvo com sucesso! Total de hóspedes: ${totalHospedes}`;
-
     }
-
   </script>
 
 </body>
