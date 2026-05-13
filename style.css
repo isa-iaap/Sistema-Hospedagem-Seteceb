@@ -406,3 +406,36 @@ textarea {
   background: #fee2e2;
   color: #dc2626;
 }
+
+/* TABELA DE VALORES */
+.tabela-valores {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.tabela-valores h3 {
+  font-size: 18px;
+  margin-bottom: 18px;
+}
+
+.tabela-valores table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabela-valores th,
+.tabela-valores td {
+  padding: 14px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+  font-size: 14px;
+}
+
+.tabela-valores th {
+  background: #f8fafc;
+  font-weight: 600;
+}
