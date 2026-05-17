@@ -34,7 +34,7 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
 
     <section class="form-card">
 
-      <form>
+      <form id="formCadastro">
 
         <div class="form-group">
           <label>Nome do responsável</label>
@@ -198,6 +198,7 @@ if (conflito) {
       cadastros.push(cadastro);
 
       localStorage.setItem("cadastros", JSON.stringify(cadastros));
+      document.getElementById("formCadastro").reset();
 
       document.getElementById("mensagem").innerHTML =
         `Cadastro salvo com sucesso! Total de hóspedes: ${totalHospedes}`;
