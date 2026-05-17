@@ -56,7 +56,16 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
             <label>Data de Saída</label>
             <input id="saida" type="date">
           </div>
-        </div>
+          
+        <div class="form-group">
+  <label>Status do pagamento</label>
+
+  <select id="pagamento">
+    <option value="">Selecione o status do pagamento</option>
+    <option value="Pendente">Pendente</option>
+    <option value="Confirmado">Confirmado</option>
+  </select>
+</div>
 
         <div class="form-group">
           <label>Seleção de Quarto</label>
@@ -109,12 +118,13 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
       const entrada = document.getElementById("entrada").value;
       const saida = document.getElementById("saida").value;
       const quarto = document.getElementById("quarto").value;
+      const pagamento = document.getElementById("pagamento").value;
 
       const adultos = Number(document.getElementById("quantidadeAdultos").value);
       const criancas = Number(document.getElementById("quantidadeCriancas").value);
       const totalHospedes = adultos + criancas;
 
-      if (nome === "" || telefone === "" || entrada === "" || saida === "" || quarto === "") {
+      if (nome === "" || telefone === "" || entrada === "" || saida === "" || quarto === "" || pagamento === "") {
         document.getElementById("mensagem").innerHTML = "Preencha todos os campos.";
         return;
       }
@@ -157,6 +167,7 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
         entrada: entrada,
         saida: saida,
         quarto: quarto,
+        pagamento: pagamento,
         adultos: adultos,
         criancas: criancas,
         totalHospedes: totalHospedes,
