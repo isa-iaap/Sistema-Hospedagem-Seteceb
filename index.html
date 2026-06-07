@@ -5,18 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sistema de Hospedagem SETECEB</title>
   <link rel="stylesheet" href="style.css">
-
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2218%22 font-size=%2218%22>🏨</text></svg>">
+  <link rel="icon"
+href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2218%22 font-size=%2218%22>🏨</text></svg>">
 </head>
 
 <body>
 
   <header class="topo">
     <div class="logo">
-      <img 
-        src="https://static.wixstatic.com/media/ba5321_61740a2cd04d47279f1d99a928465122~mv2.png/v1/fill/w_221,h_63,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo%20SETECEB%20Branca.png" 
-        alt="Logo SETECEB"
-      >
+      <img src="https://static.wixstatic.com/media/ba5321_61740a2cd04d47279f1d99a928465122~mv2.png/v1/fill/w_221,h_63,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo%20SETECEB%20Branca.png" alt="Logo SETECEB">
     </div>
 
     <nav class="menu-topo">
@@ -40,9 +37,13 @@
             <p>Total de Hóspedes</p>
             <strong id="totalHospedes">0</strong>
           </div>
-
           <span class="icon black">
-            👥
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
           </span>
         </div>
 
@@ -51,9 +52,13 @@
             <p>Quartos Disponíveis</p>
             <strong id="quartosDisponiveis">6</strong>
           </div>
-
           <span class="icon black">
-            🛏️
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8"></path>
+              <path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"></path>
+              <path d="M12 4v6"></path>
+              <path d="M2 18h20"></path>
+            </svg>
           </span>
         </div>
 
@@ -62,9 +67,11 @@
             <p>Quartos Ocupados</p>
             <strong id="quartosOcupados">0</strong>
           </div>
-
           <span class="icon black">
-            ✅
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
+              <path d="m9 11 3 3L22 4"></path>
+            </svg>
           </span>
         </div>
 
@@ -73,9 +80,13 @@
             <p>Reservas Ativas</p>
             <strong id="reservasAtivas">0</strong>
           </div>
-
           <span class="icon black">
-            📅
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 2v4"></path>
+              <path d="M16 2v4"></path>
+              <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+              <path d="M3 10h18"></path>
+            </svg>
           </span>
         </div>
 
@@ -97,9 +108,8 @@
 
         <div class="panel">
           <h2>Últimas Reservas</h2>
-
           <div id="ultimasReservas">
-            <p>Nenhuma reserva cadastrada ainda.</p>
+            <p>Nenhuma reserva cadastrada ainda</p>
           </div>
         </div>
 
@@ -112,74 +122,44 @@
     function atualizarDashboard() {
       const cadastros = JSON.parse(localStorage.getItem("cadastros")) || [];
 
-      const totalQuartos = 6;
-
-      const hoje = new Date();
-      hoje.setHours(0, 0, 0, 0);
-
-      const reservasAtivasLista = cadastros.filter(cadastro => {
-        const entrada = new Date(cadastro.entrada + "T00:00:00");
-        const saida = new Date(cadastro.saida + "T00:00:00");
-
-        return hoje >= entrada && hoje < saida;
-      });
-
       let totalHospedes = 0;
 
-      reservasAtivasLista.forEach(cadastro => {
+      cadastros.forEach(cadastro => {
         totalHospedes += Number(cadastro.totalHospedes) || 0;
       });
 
+      const totalQuartos = 6;
+
       const quartosOcupados = new Set(
-        reservasAtivasLista.map(cadastro => cadastro.quarto)
+        cadastros.map(cadastro => cadastro.quarto)
       ).size;
 
       const quartosDisponiveis = totalQuartos - quartosOcupados;
-      const reservasAtivas = reservasAtivasLista.length;
+      const reservasAtivas = cadastros.length;
 
       document.getElementById("totalHospedes").innerText = totalHospedes;
       document.getElementById("quartosDisponiveis").innerText = quartosDisponiveis;
       document.getElementById("quartosOcupados").innerText = quartosOcupados;
       document.getElementById("reservasAtivas").innerText = reservasAtivas;
 
-      mostrarUltimasReservas(cadastros);
-    }
-
-    function mostrarUltimasReservas(cadastros) {
       const ultimasReservas = document.getElementById("ultimasReservas");
 
       if (cadastros.length === 0) {
-        ultimasReservas.innerHTML = "<p>Nenhuma reserva cadastrada ainda.</p>";
-        return;
-      }
+        ultimasReservas.innerHTML = "<p>Nenhuma reserva cadastrada ainda</p>";
+      } else {
+        const ultimas = cadastros.slice(-3).reverse();
 
-      const ultimas = cadastros.slice(-3).reverse();
+        ultimasReservas.innerHTML = "";
 
-      ultimasReservas.innerHTML = "";
-
-      ultimas.forEach(reserva => {
-        ultimasReservas.innerHTML += `
-          <div class="reserva-item">
+        ultimas.forEach(reserva => {
+          ultimasReservas.innerHTML += `
             <p>
               <strong>${reserva.responsavel}</strong><br>
-              Quarto: ${reserva.quarto}<br>
-              Hóspedes: ${reserva.totalHospedes}<br>
-              Entrada: ${formatarData(reserva.entrada)}<br>
-              Saída: ${formatarData(reserva.saida)}<br>
-              Pagamento: ${reserva.pagamento || "Não informado"}
+              ${reserva.quarto} - ${reserva.totalHospedes} hóspedes
             </p>
-          </div>
-        `;
-      });
-    }
-
-    function formatarData(data) {
-      if (!data) {
-        return "Não informado";
+          `;
+        });
       }
-
-      const partes = data.split("-");
-      return `${partes[2]}/${partes[1]}/${partes[0]}`;
     }
 
     atualizarDashboard();
