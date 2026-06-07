@@ -1,57 +1,189 @@
-<script>
-  function atualizarDashboard() {
-    const cadastros = JSON.parse(localStorage.getItem("cadastros")) || [];
-    const hoje = new Date();
-    hoje.setHours(0, 0, 0, 0);
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Hospedagem SETECEB</title>
+  <link rel="stylesheet" href="style.css">
 
-    const totalQuartos = 6;
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2218%22 font-size=%2218%22>🏨</text></svg>">
+</head>
 
-    const reservasAtivasLista = cadastros.filter(cadastro => {
-      const entrada = new Date(cadastro.entrada + "T00:00:00");
-      const saida = new Date(cadastro.saida + "T00:00:00");
+<body>
 
-      return hoje >= entrada && hoje < saida;
-    });
+  <header class="topo">
+    <div class="logo">
+      <img 
+        src="https://static.wixstatic.com/media/ba5321_61740a2cd04d47279f1d99a928465122~mv2.png/v1/fill/w_221,h_63,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo%20SETECEB%20Branca.png" 
+        alt="Logo SETECEB"
+      >
+    </div>
 
-    let totalHospedes = 0;
+    <nav class="menu-topo">
+      <a href="index.html">Início</a>
+      <a href="cadastro-hospedes.html">Hóspedes</a>
+      <a href="reservas.html">Reservas</a>
+      <a href="quartos.html">Quartos</a>
+    </nav>
+  </header>
 
-    reservasAtivasLista.forEach(cadastro => {
-      totalHospedes += Number(cadastro.totalHospedes) || 0;
-    });
+  <div class="layout">
+    <main class="main">
 
-    const quartosOcupados = new Set(
-      reservasAtivasLista.map(cadastro => cadastro.quarto)
-    ).size;
+      <h1>Painel de Controle</h1>
+      <p class="subtitle">Visão geral do sistema de hospedagem</p>
 
-    const quartosDisponiveis = totalQuartos - quartosOcupados;
-    const reservasAtivas = reservasAtivasLista.length;
+      <section class="grid">
 
-    document.getElementById("totalHospedes").innerText = totalHospedes;
-    document.getElementById("quartosDisponiveis").innerText = quartosDisponiveis;
-    document.getElementById("quartosOcupados").innerText = quartosOcupados;
-    document.getElementById("reservasAtivas").innerText = reservasAtivas;
+        <div class="card">
+          <div>
+            <p>Total de Hóspedes</p>
+            <strong id="totalHospedes">0</strong>
+          </div>
 
-    const ultimasReservas = document.getElementById("ultimasReservas");
+          <span class="icon black">
+            👥
+          </span>
+        </div>
 
-    if (cadastros.length === 0) {
-      ultimasReservas.innerHTML = "<p>Nenhuma reserva cadastrada ainda</p>";
-    } else {
+        <div class="card">
+          <div>
+            <p>Quartos Disponíveis</p>
+            <strong id="quartosDisponiveis">6</strong>
+          </div>
+
+          <span class="icon black">
+            🛏️
+          </span>
+        </div>
+
+        <div class="card">
+          <div>
+            <p>Quartos Ocupados</p>
+            <strong id="quartosOcupados">0</strong>
+          </div>
+
+          <span class="icon black">
+            ✅
+          </span>
+        </div>
+
+        <div class="card">
+          <div>
+            <p>Reservas Ativas</p>
+            <strong id="reservasAtivas">0</strong>
+          </div>
+
+          <span class="icon black">
+            📅
+          </span>
+        </div>
+
+      </section>
+
+      <section class="bottom">
+
+        <div class="panel">
+          <h2>Ações Rápidas</h2>
+
+          <a class="btn primary" href="cadastro-hospedes.html">
+            Cadastrar Novo Hóspede
+          </a>
+
+          <a class="btn secondary" href="quartos.html">
+            Ver Quartos Disponíveis
+          </a>
+        </div>
+
+        <div class="panel">
+          <h2>Últimas Reservas</h2>
+
+          <div id="ultimasReservas">
+            <p>Nenhuma reserva cadastrada ainda.</p>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    function atualizarDashboard() {
+      const cadastros = JSON.parse(localStorage.getItem("cadastros")) || [];
+
+      const totalQuartos = 6;
+
+      const hoje = new Date();
+      hoje.setHours(0, 0, 0, 0);
+
+      const reservasAtivasLista = cadastros.filter(cadastro => {
+        const entrada = new Date(cadastro.entrada + "T00:00:00");
+        const saida = new Date(cadastro.saida + "T00:00:00");
+
+        return hoje >= entrada && hoje < saida;
+      });
+
+      let totalHospedes = 0;
+
+      reservasAtivasLista.forEach(cadastro => {
+        totalHospedes += Number(cadastro.totalHospedes) || 0;
+      });
+
+      const quartosOcupados = new Set(
+        reservasAtivasLista.map(cadastro => cadastro.quarto)
+      ).size;
+
+      const quartosDisponiveis = totalQuartos - quartosOcupados;
+      const reservasAtivas = reservasAtivasLista.length;
+
+      document.getElementById("totalHospedes").innerText = totalHospedes;
+      document.getElementById("quartosDisponiveis").innerText = quartosDisponiveis;
+      document.getElementById("quartosOcupados").innerText = quartosOcupados;
+      document.getElementById("reservasAtivas").innerText = reservasAtivas;
+
+      mostrarUltimasReservas(cadastros);
+    }
+
+    function mostrarUltimasReservas(cadastros) {
+      const ultimasReservas = document.getElementById("ultimasReservas");
+
+      if (cadastros.length === 0) {
+        ultimasReservas.innerHTML = "<p>Nenhuma reserva cadastrada ainda.</p>";
+        return;
+      }
+
       const ultimas = cadastros.slice(-3).reverse();
 
       ultimasReservas.innerHTML = "";
 
       ultimas.forEach(reserva => {
         ultimasReservas.innerHTML += `
-          <p>
-            <strong>${reserva.responsavel}</strong><br>
-            ${reserva.quarto} - ${reserva.totalHospedes} hóspede(s)<br>
-            Entrada: ${reserva.entrada} | Saída: ${reserva.saida}<br>
-            Pagamento: ${reserva.pagamento || "Não informado"}
-          </p>
+          <div class="reserva-item">
+            <p>
+              <strong>${reserva.responsavel}</strong><br>
+              Quarto: ${reserva.quarto}<br>
+              Hóspedes: ${reserva.totalHospedes}<br>
+              Entrada: ${formatarData(reserva.entrada)}<br>
+              Saída: ${formatarData(reserva.saida)}<br>
+              Pagamento: ${reserva.pagamento || "Não informado"}
+            </p>
+          </div>
         `;
       });
     }
-  }
 
-  atualizarDashboard();
-</script>
+    function formatarData(data) {
+      if (!data) {
+        return "Não informado";
+      }
+
+      const partes = data.split("-");
+      return `${partes[2]}/${partes[1]}/${partes[0]}`;
+    }
+
+    atualizarDashboard();
+  </script>
+
+</body>
+</html>
