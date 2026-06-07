@@ -5,15 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quartos</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon"
-href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2218%22 font-size=%2218%22>🛏️</text></svg>">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2218%22 font-size=%2218%22>🛏️</text></svg>">
 </head>
 
 <body>
 
   <header class="topo">
     <div class="logo">
-      <img src="https://static.wixstatic.com/media/ba5321_61740a2cd04d47279f1d99a928465122~mv2.png/v1/fill/w_221,h_63,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo%20SETECEB%20Branca.png" alt="Logo SETECEB">
+      <img 
+        src="https://static.wixstatic.com/media/ba5321_61740a2cd04d47279f1d99a928465122~mv2.png/v1/fill/w_221,h_63,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo%20SETECEB%20Branca.png" 
+        alt="Logo SETECEB"
+      >
     </div>
 
     <nav class="menu-topo">
@@ -30,6 +33,7 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
     <p class="subtitle">Visão geral dos quartos e disponibilidade</p>
 
     <section class="quartos-resumo">
+
       <div class="resumo-card">
         <span>✓</span>
         <div>
@@ -53,6 +57,7 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
           <strong id="quartosOcupados">0</strong>
         </div>
       </div>
+
     </section>
 
     <section class="quartos-lista" id="listaQuartos"></section>
@@ -73,33 +78,85 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
       const reservas = JSON.parse(localStorage.getItem("cadastros")) || [];
       const lista = document.getElementById("listaQuartos");
 
-      lista.innerHTML = "";
+      const hoje = new Date();
+      hoje.setHours(0, 0, 0, 0);
 
+      let disponiveis = 0;
+      let reservados = 0;
       let ocupados = 0;
 
-      quartos.forEach(quarto => {
-        const reserva = reservas.find(item => item.quarto === quarto.nome);
-        const estaOcupado = reserva !== undefined;
+      lista.innerHTML = "";
 
-        if (estaOcupado) {
+      quartos.forEach(quarto => {
+        const reservasDoQuarto = reservas.filter(reserva => reserva.quarto === quarto.nome);
+
+        const reservaAtual = reservasDoQuarto.find(reserva => {
+          const entrada = new Date(reserva.entrada + "T00:00:00");
+          const saida = new Date(reserva.saida + "T00:00:00");
+
+          return hoje >= entrada && hoje < saida;
+        });
+
+        const reservaFutura = reservasDoQuarto.find(reserva => {
+          const entrada = new Date(reserva.entrada + "T00:00:00");
+
+          return entrada > hoje;
+        });
+
+        let status = "Disponível";
+        let classeStatus = "quarto-disponivel";
+        let reservaExibida = null;
+
+        if (reservaAtual) {
+          status = "Ocupado";
+          classeStatus = "quarto-ocupado";
+          reservaExibida = reservaAtual;
           ocupados++;
+        } else if (reservaFutura) {
+          status = "Reservado";
+          classeStatus = "quarto-reservado";
+          reservaExibida = reservaFutura;
+          reservados++;
+        } else {
+          disponiveis++;
         }
 
         lista.innerHTML += `
-          <div class="quarto-box ${estaOcupado ? "quarto-ocupado" : "quarto-disponivel"}">
+          <div class="quarto-box ${classeStatus}">
             <h2>${quarto.nome}</h2>
             <p>Capacidade: ${quarto.capacidade}</p>
             <p>Tipo: ${quarto.tipo}</p>
             <hr>
-            <p>Status: <strong>${estaOcupado ? "Ocupado" : "Disponível"}</strong></p>
-            ${estaOcupado ? `<p>Responsável: ${reserva.responsavel}</p>` : ""}
+
+            <p>Status: <strong>${status}</strong></p>
+
+            ${
+              reservaExibida
+                ? `
+                  <p>Responsável: ${reservaExibida.responsavel}</p>
+                  <p>Entrada: ${formatarData(reservaExibida.entrada)}</p>
+                  <p>Saída: ${formatarData(reservaExibida.saida)}</p>
+                  <p>Hóspedes: ${reservaExibida.totalHospedes}</p>
+                  <p>Pagamento: ${reservaExibida.pagamento || "Não informado"}</p>
+                `
+                : `<p>Nenhuma reserva ativa ou futura para este quarto.</p>`
+            }
           </div>
         `;
       });
 
-      document.getElementById("quartosDisponiveis").innerText = quartos.length - ocupados;
-      document.getElementById("quartosReservados").innerText = ocupados;
+      document.getElementById("quartosDisponiveis").innerText = disponiveis;
+      document.getElementById("quartosReservados").innerText = reservados;
       document.getElementById("quartosOcupados").innerText = ocupados;
+    }
+
+    function formatarData(data) {
+      if (!data) {
+        return "Não informado";
+      }
+
+      const partes = data.split("-");
+      return `${partes[2]}/${partes[1]}/${partes[0]}`;
     }
 
     carregarQuartos();
