@@ -5,205 +5,208 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro de Hóspede</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon"
-href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2218%22 font-size=%2218%22>👥</text></svg>">
 </head>
 
 <body>
 
-  <header class="topo">
-    <div class="logo">
-      <img
-        src="https://static.wixstatic.com/media/ba5321_61740a2cd04d47279f1d99a928465122~mv2.png/v1/fill/w_221,h_63,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo%20SETECEB%20Branca.png"
-        alt="Logo SETECEB"
-      >
-    </div>
+<header class="topo">
+  <div class="logo">
+    <img
+      src="https://static.wixstatic.com/media/ba5321_61740a2cd04d47279f1d99a928465122~mv2.png/v1/fill/w_221,h_63,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo%20SETECEB%20Branca.png"
+      alt="Logo SETECEB">
+  </div>
 
-    <nav class="menu-topo">
-      <a href="index.html">Início</a>
-      <a href="cadastro-hospedes.html">Hóspedes</a>
-      <a href="reservas.html">Reservas</a>
-      <a href="quartos.html">Quartos</a>
-    </nav>
-  </header>
+  <nav class="menu-topo">
+    <a href="index.html">Início</a>
+    <a href="cadastro-hospedes.html">Hóspedes</a>
+    <a href="reservas.html">Reservas</a>
+    <a href="quartos.html">Quartos</a>
+  </nav>
+</header>
 
-  <main class="main">
+<main class="main">
 
-    <h1>Cadastro de Hóspede</h1>
-    <p class="subtitle">Cadastre o responsável e os dados da hospedagem</p>
+  <h1>Cadastro de Hóspede</h1>
+  <p class="subtitle">Cadastre o responsável e os dados da hospedagem</p>
 
-    <section class="form-card">
+  <section class="form-card">
 
-      <form id="formCadastro">
+    <form id="formCadastro">
+
+      <div class="form-group">
+        <label for="nomeResponsavel">Nome do responsável</label>
+        <input id="nomeResponsavel" type="text" placeholder="Digite o nome do responsável">
+      </div>
+
+      <div class="form-group">
+        <label for="telefone">Telefone</label>
+        <input id="telefone" type="text" placeholder="(00) 00000-0000">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="entrada">Data de Entrada</label>
+          <input id="entrada" type="date">
+        </div>
 
         <div class="form-group">
-          <label>Nome do responsável</label>
-          <input id="nomeResponsavel" type="text" placeholder="Digite o nome do responsável">
+          <label for="saida">Data de Saída</label>
+          <input id="saida" type="date">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="pagamento">Status do pagamento</label>
+        <select id="pagamento">
+          <option value="">Selecione o status do pagamento</option>
+          <option value="Pendente">Pendente</option>
+          <option value="Confirmado">Confirmado</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="quarto">Seleção de Quarto</label>
+        <select id="quarto">
+          <option value="">Selecione um quarto</option>
+          <option value="Apartamento 104">Apartamento 104</option>
+          <option value="Apartamento 105">Apartamento 105</option>
+          <option value="Apartamento 106">Apartamento 106</option>
+          <option value="Suíte 1">Suíte 1</option>
+          <option value="Suíte 2">Suíte 2</option>
+          <option value="Suíte 3">Suíte 3</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="quantidadeAdultos">Quantidade de adultos</label>
+          <input type="number" id="quantidadeAdultos" min="1" max="6" value="1">
         </div>
 
         <div class="form-group">
-          <label>Telefone</label>
-          <input id="telefone" type="text" placeholder="(00) 00000-0000">
+          <label for="quantidadeCriancas">Crianças até 12 anos</label>
+          <input type="number" id="quantidadeCriancas" min="0" max="6" value="0">
         </div>
+      </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label>Data de Entrada</label>
-            <input id="entrada" type="date">
-          </div>
+      <div class="form-buttons">
+        <button type="button" class="btn primary" onclick="salvarCadastro()">
+          Salvar Cadastro
+        </button>
 
-          <div class="form-group">
-            <label>Data de Saída</label>
-            <input id="saida" type="date">
-          </div>
-          
-        <div class="form-group">
-  <label>Status do pagamento</label>
+        <button type="reset" class="btn secondary">
+          Cancelar
+        </button>
+      </div>
 
-  <select id="pagamento">
-    <option value="">Selecione o status do pagamento</option>
-    <option value="Pendente">Pendente</option>
-    <option value="Confirmado">Confirmado</option>
-  </select>
-</div>
+      <p id="mensagem" class="mensagem"></p>
 
-        <div class="form-group">
-          <label>Seleção de Quarto</label>
+    </form>
 
-          <select id="quarto">
-            <option value="">Selecione um quarto</option>
-            <option>Apartamento 104</option>
-            <option>Apartamento 105</option>
-            <option>Apartamento 106</option>
-            <option>Suíte 1</option>
-            <option>Suíte 2</option>
-            <option>Suíte 3</option>
-          </select>
-        </div>
+  </section>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label>Quantidade de adultos</label>
-            <input type="number" id="quantidadeAdultos" min="1" max="6" value="1">
-          </div>
+</main>
 
-          <div class="form-group">
-            <label>Crianças até 12 anos</label>
-            <input type="number" id="quantidadeCriancas" min="0" max="6" value="0">
-          </div>
-        </div>
+<script>
+  function salvarCadastro() {
+    const nome = document.getElementById("nomeResponsavel").value.trim();
+    const telefone = document.getElementById("telefone").value.trim();
+    const entrada = document.getElementById("entrada").value;
+    const saida = document.getElementById("saida").value;
+    const quarto = document.getElementById("quarto").value;
+    const pagamento = document.getElementById("pagamento").value;
 
-        <div class="form-buttons">
-          <button type="button" class="btn primary" onclick="salvarCadastro()">
-            Salvar Cadastro
-          </button>
+    const adultos = Number(document.getElementById("quantidadeAdultos").value);
+    const criancas = Number(document.getElementById("quantidadeCriancas").value);
+    const totalHospedes = adultos + criancas;
 
-          <button type="reset" class="btn secondary">
-            Cancelar
-          </button>
-        </div>
+    const mensagem = document.getElementById("mensagem");
 
-        <p id="mensagem" class="mensagem"></p>
-
-      </form>
-
-    </section>
-
-  </main>
-
-  <script>
-    function salvarCadastro() {
-      const nome = document.getElementById("nomeResponsavel").value.trim();
-      const telefone = document.getElementById("telefone").value.trim();
-      const entrada = document.getElementById("entrada").value;
-      const saida = document.getElementById("saida").value;
-      const quarto = document.getElementById("quarto").value;
-      const pagamento = document.getElementById("pagamento").value;
-
-      const adultos = Number(document.getElementById("quantidadeAdultos").value);
-      const criancas = Number(document.getElementById("quantidadeCriancas").value);
-      const totalHospedes = adultos + criancas;
-
-      if (nome === "" || telefone === "" || entrada === "" || saida === "" || quarto === "" || pagamento === "") {
-        document.getElementById("mensagem").innerHTML = "Preencha todos os campos.";
-        return;
-      }
-
-      if (totalHospedes > 6) {
-        document.getElementById("mensagem").innerHTML = "O limite máximo é de 6 hóspedes.";
-        return;
-      }
-
-      let valorDiaria = 0;
-
-      if (totalHospedes === 1) {
-        valorDiaria = 120;
-      } else if (totalHospedes === 2) {
-        valorDiaria = 174;
-      } else if (totalHospedes === 3) {
-        valorDiaria = 230;
-      } else if (totalHospedes === 4) {
-        valorDiaria = 280;
-      } else {
-        valorDiaria = 336;
-      }
-
-      const dataEntrada = new Date(entrada);
-      const dataSaida = new Date(saida);
-
-      const quantidadeDiarias = (dataSaida - dataEntrada) / (1000 * 60 * 60 * 24);
-
-      if (quantidadeDiarias <= 0) {
-        document.getElementById("mensagem").innerHTML =
-          "A data de saída precisa ser depois da entrada.";
-        return;
-      }
-
-      const valorTotal = valorDiaria * quantidadeDiarias;
-
-      const cadastro = {
-        responsavel: nome,
-        telefone: telefone,
-        entrada: entrada,
-        saida: saida,
-        quarto: quarto,
-        pagamento: pagamento,
-        adultos: adultos,
-        criancas: criancas,
-        totalHospedes: totalHospedes,
-        quantidadeDiarias: quantidadeDiarias,
-        valorDiaria: valorDiaria.toFixed(2).replace(".", ","),
-        valorTotal: valorTotal.toFixed(2).replace(".", ",")
-      };
-
-      let cadastros = JSON.parse(localStorage.getItem("cadastros")) || [];
-
-      const conflito = cadastros.some(reserva => {
-  if (reserva.quarto !== quarto) {
-    return false;
-  }
-
-  const entradaExistente = new Date(reserva.entrada);
-  const saidaExistente = new Date(reserva.saida);
-
-  return dataEntrada < saidaExistente && dataSaida > entradaExistente;
-});
-
-if (conflito) {
-  document.getElementById("mensagem").innerHTML =
-    "Este quarto já está reservado nesse período.";
-  return;
-}
-
-      cadastros.push(cadastro);
-
-      localStorage.setItem("cadastros", JSON.stringify(cadastros));
-      document.getElementById("formCadastro").reset();
-
-      document.getElementById("mensagem").innerHTML =
-        `Cadastro salvo com sucesso! Total de hóspedes: ${totalHospedes}`;
+    if (!nome || !telefone || !entrada || !saida || !quarto || !pagamento) {
+      mensagem.innerHTML = "Preencha todos os campos.";
+      return;
     }
-  </script>
 
+    if (adultos < 1) {
+      mensagem.innerHTML = "É necessário cadastrar pelo menos 1 adulto.";
+      return;
+    }
+
+    if (totalHospedes > 6) {
+      mensagem.innerHTML = "O limite máximo é de 6 hóspedes por quarto.";
+      return;
+    }
+
+    const dataEntrada = new Date(entrada + "T00:00:00");
+    const dataSaida = new Date(saida + "T00:00:00");
+
+    const quantidadeDiarias = (dataSaida - dataEntrada) / (1000 * 60 * 60 * 24);
+
+    if (quantidadeDiarias <= 0) {
+      mensagem.innerHTML = "A data de saída precisa ser depois da entrada.";
+      return;
+    }
+
+    let valorDiaria;
+
+    if (totalHospedes === 1) {
+      valorDiaria = 120;
+    } else if (totalHospedes === 2) {
+      valorDiaria = 174;
+    } else if (totalHospedes === 3) {
+      valorDiaria = 230;
+    } else if (totalHospedes === 4) {
+      valorDiaria = 280;
+    } else {
+      valorDiaria = 336;
+    }
+
+    const valorTotal = valorDiaria * quantidadeDiarias;
+
+    let cadastros = JSON.parse(localStorage.getItem("cadastros")) || [];
+
+    const conflito = cadastros.some(reserva => {
+      if (reserva.quarto !== quarto) {
+        return false;
+      }
+
+      const entradaExistente = new Date(reserva.entrada + "T00:00:00");
+      const saidaExistente = new Date(reserva.saida + "T00:00:00");
+
+      return dataEntrada < saidaExistente && dataSaida > entradaExistente;
+    });
+
+    if (conflito) {
+      mensagem.innerHTML = "Este quarto já está reservado nesse período.";
+      return;
+    }
+
+    const cadastro = {
+      responsavel: nome,
+      telefone: telefone,
+      entrada: entrada,
+      saida: saida,
+      quarto: quarto,
+      pagamento: pagamento,
+      adultos: adultos,
+      criancas: criancas,
+      totalHospedes: totalHospedes,
+      quantidadeDiarias: quantidadeDiarias,
+      valorDiaria: valorDiaria.toFixed(2).replace(".", ","),
+      valorTotal: valorTotal.toFixed(2).replace(".", ",")
+    };
+
+    cadastros.push(cadastro);
+    localStorage.setItem("cadastros", JSON.stringify(cadastros));
+
+    document.getElementById("formCadastro").reset();
+
+    mensagem.innerHTML =
+      `Cadastro salvo com sucesso! Total: ${totalHospedes} hóspede(s). Valor total: R$ ${cadastro.valorTotal}`;
+  }
+</script>
+
+</body>
+</html>
 </body>
 </html>
