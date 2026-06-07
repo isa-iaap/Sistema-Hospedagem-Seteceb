@@ -6,7 +6,7 @@
   <title>Cadastro de Hóspede</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon"
-href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2218%22 font-size=%2218%22>👥</text></svg>">
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2218%22 font-size=%2218%22>👥</text></svg>">
 </head>
 
 <body>
@@ -15,8 +15,7 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
     <div class="logo">
       <img
         src="https://static.wixstatic.com/media/ba5321_61740a2cd04d47279f1d99a928465122~mv2.png/v1/fill/w_221,h_63,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo%20SETECEB%20Branca.png"
-        alt="Logo SETECEB"
-      >
+        alt="Logo SETECEB">
     </div>
 
     <nav class="menu-topo">
@@ -37,38 +36,39 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
       <form id="formCadastro">
 
         <div class="form-group">
-          <label>Nome do responsável</label>
+          <label for="nomeResponsavel">Nome do responsável</label>
           <input id="nomeResponsavel" type="text" placeholder="Digite o nome do responsável">
         </div>
 
         <div class="form-group">
-          <label>Telefone</label>
-          <input id="telefone" type="text" placeholder="(00) 00000-0000">
+          <label for="telefone">Telefone</label>
+          <input id="telefone" type="text" placeholder="(62) 99999-9999">
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label>Data de Entrada</label>
+            <label for="entrada">Data de Entrada</label>
             <input id="entrada" type="date">
           </div>
 
           <div class="form-group">
-            <label>Data de Saída</label>
+            <label for="saida">Data de Saída</label>
             <input id="saida" type="date">
           </div>
-          
-        <div class="form-group">
-  <label>Status do pagamento</label>
-
-  <select id="pagamento">
-    <option value="">Selecione o status do pagamento</option>
-    <option value="Pendente">Pendente</option>
-    <option value="Confirmado">Confirmado</option>
-  </select>
-</div>
+        </div>
 
         <div class="form-group">
-          <label>Seleção de Quarto</label>
+          <label for="pagamento">Status do pagamento</label>
+
+          <select id="pagamento">
+            <option value="">Selecione o status do pagamento</option>
+            <option value="Pendente">Pendente</option>
+            <option value="Confirmado">Confirmado</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="quarto">Seleção de Quarto</label>
 
           <select id="quarto">
             <option value="">Selecione um quarto</option>
@@ -83,12 +83,12 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
 
         <div class="form-row">
           <div class="form-group">
-            <label>Quantidade de adultos</label>
+            <label for="quantidadeAdultos">Quantidade de adultos</label>
             <input type="number" id="quantidadeAdultos" min="1" max="6" value="1">
           </div>
 
           <div class="form-group">
-            <label>Crianças até 12 anos</label>
+            <label for="quantidadeCriancas">Crianças até 12 anos</label>
             <input type="number" id="quantidadeCriancas" min="0" max="6" value="0">
           </div>
         </div>
@@ -98,7 +98,7 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
             Salvar Cadastro
           </button>
 
-          <button type="reset" class="btn secondary">
+          <button type="reset" class="btn secondary" onclick="limparMensagem()">
             Cancelar
           </button>
         </div>
@@ -112,6 +112,14 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
   </main>
 
   <script>
+    function mostrarMensagem(texto) {
+      document.getElementById("mensagem").innerHTML = texto;
+    }
+
+    function limparMensagem() {
+      document.getElementById("mensagem").innerHTML = "";
+    }
+
     function salvarCadastro() {
       const nome = document.getElementById("nomeResponsavel").value.trim();
       const telefone = document.getElementById("telefone").value.trim();
@@ -124,13 +132,56 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
       const criancas = Number(document.getElementById("quantidadeCriancas").value);
       const totalHospedes = adultos + criancas;
 
-      if (nome === "" || telefone === "" || entrada === "" || saida === "" || quarto === "" || pagamento === "") {
-        document.getElementById("mensagem").innerHTML = "Preencha todos os campos.";
+      const nomeValido = /^[A-Za-zÀ-ÿ\s]{3,}$/.test(nome);
+      const telefoneValido = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/.test(telefone);
+
+      if (!nomeValido) {
+        mostrarMensagem("Digite um nome válido com pelo menos 3 letras. Não use números.");
+        return;
+      }
+
+      if (!telefoneValido) {
+        mostrarMensagem("Digite um telefone válido. Exemplo: (62) 99999-9999.");
+        return;
+      }
+
+      if (entrada === "" || saida === "") {
+        mostrarMensagem("Informe a data de entrada e a data de saída.");
+        return;
+      }
+
+      if (pagamento === "") {
+        mostrarMensagem("Selecione o status do pagamento.");
+        return;
+      }
+
+      if (quarto === "") {
+        mostrarMensagem("Selecione um quarto.");
+        return;
+      }
+
+      if (!Number.isInteger(adultos) || adultos < 1 || adultos > 6) {
+        mostrarMensagem("A quantidade de adultos deve ser entre 1 e 6.");
+        return;
+      }
+
+      if (!Number.isInteger(criancas) || criancas < 0 || criancas > 6) {
+        mostrarMensagem("A quantidade de crianças deve ser entre 0 e 6.");
         return;
       }
 
       if (totalHospedes > 6) {
-        document.getElementById("mensagem").innerHTML = "O limite máximo é de 6 hóspedes.";
+        mostrarMensagem("O limite máximo é de 6 hóspedes por quarto.");
+        return;
+      }
+
+      const dataEntrada = new Date(entrada);
+      const dataSaida = new Date(saida);
+
+      const quantidadeDiarias = (dataSaida - dataEntrada) / (1000 * 60 * 60 * 24);
+
+      if (quantidadeDiarias <= 0) {
+        mostrarMensagem("A data de saída precisa ser depois da data de entrada.");
         return;
       }
 
@@ -148,14 +199,21 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
         valorDiaria = 336;
       }
 
-      const dataEntrada = new Date(entrada);
-      const dataSaida = new Date(saida);
+      let cadastros = JSON.parse(localStorage.getItem("cadastros")) || [];
 
-      const quantidadeDiarias = (dataSaida - dataEntrada) / (1000 * 60 * 60 * 24);
+      const conflito = cadastros.some(reserva => {
+        if (reserva.quarto !== quarto) {
+          return false;
+        }
 
-      if (quantidadeDiarias <= 0) {
-        document.getElementById("mensagem").innerHTML =
-          "A data de saída precisa ser depois da entrada.";
+        const entradaExistente = new Date(reserva.entrada);
+        const saidaExistente = new Date(reserva.saida);
+
+        return dataEntrada < saidaExistente && dataSaida > entradaExistente;
+      });
+
+      if (conflito) {
+        mostrarMensagem("Este quarto já está reservado nesse período.");
         return;
       }
 
@@ -176,34 +234,20 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
         valorTotal: valorTotal.toFixed(2).replace(".", ",")
       };
 
-      let cadastros = JSON.parse(localStorage.getItem("cadastros")) || [];
-
-      const conflito = cadastros.some(reserva => {
-  if (reserva.quarto !== quarto) {
-    return false;
-  }
-
-  const entradaExistente = new Date(reserva.entrada);
-  const saidaExistente = new Date(reserva.saida);
-
-  return dataEntrada < saidaExistente && dataSaida > entradaExistente;
-});
-
-if (conflito) {
-  document.getElementById("mensagem").innerHTML =
-    "Este quarto já está reservado nesse período.";
-  return;
-}
-
       cadastros.push(cadastro);
 
       localStorage.setItem("cadastros", JSON.stringify(cadastros));
+
       document.getElementById("formCadastro").reset();
 
-      document.getElementById("mensagem").innerHTML =
-        `Cadastro salvo com sucesso! Total de hóspedes: ${totalHospedes}`;
+      mostrarMensagem(
+        `Cadastro salvo com sucesso! Total de hóspedes: ${totalHospedes}. Valor total: R$ ${cadastro.valorTotal}`
+      );
     }
   </script>
+
+</body>
+</html>
 
 </body>
 </html> 
