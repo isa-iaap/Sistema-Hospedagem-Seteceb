@@ -6,7 +6,7 @@
   <title>Reservas</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon"
-href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2218%22 font-size=%2218%22>📅</text></svg>">
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2218%22 font-size=%2218%22>📅</text></svg>">
 </head>
 
 <body>
@@ -16,8 +16,7 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
     <div class="logo">
       <img
         src="https://static.wixstatic.com/media/ba5321_61740a2cd04d47279f1d99a928465122~mv2.png/v1/fill/w_221,h_63,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo%20SETECEB%20Branca.png"
-        alt="Logo SETECEB"
-      >
+        alt="Logo SETECEB">
     </div>
 
     <nav class="menu-topo">
@@ -48,10 +47,7 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
           </strong>
         </div>
 
-        <a
-          class="btn primary"
-          href="cadastro-hospedes.html"
-        >
+        <a class="btn primary" href="cadastro-hospedes.html">
           Nova Reserva
         </a>
 
@@ -64,49 +60,70 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
   </main>
 
   <script>
+    function formatarData(data) {
+      if (!data) {
+        return "Não informada";
+      }
+
+      const partes = data.split("-");
+      return `${partes[2]}/${partes[1]}/${partes[0]}`;
+    }
+
+    function verificarStatusReserva(entrada, saida) {
+      const hoje = new Date();
+      hoje.setHours(0, 0, 0, 0);
+
+      const dataEntrada = new Date(entrada);
+      const dataSaida = new Date(saida);
+
+      if (hoje < dataEntrada) {
+        return "Agendada";
+      }
+
+      if (hoje >= dataEntrada && hoje <= dataSaida) {
+        return "Ativa";
+      }
+
+      return "Finalizada";
+    }
 
     function carregarReservas() {
+      const reservas = JSON.parse(localStorage.getItem("cadastros")) || [];
 
-      const reservas =
-        JSON.parse(localStorage.getItem("cadastros")) || [];
-
-      const lista =
-        document.getElementById("listaReservas");
+      const lista = document.getElementById("listaReservas");
 
       lista.innerHTML = "";
 
-      document.getElementById("totalReservas").innerText =
-        reservas.length;
+      const reservasAtivas = reservas.filter(reserva => {
+        const status = verificarStatusReserva(reserva.entrada, reserva.saida);
+        return status === "Ativa" || status === "Agendada";
+      });
+
+      document.getElementById("totalReservas").innerText = reservasAtivas.length;
 
       if (reservas.length === 0) {
-
         lista.innerHTML = `
-
           <div class="sem-reservas">
             Nenhuma reserva cadastrada ainda
           </div>
-
         `;
-
         return;
       }
 
       reservas.forEach((reserva, index) => {
+        const status = verificarStatusReserva(reserva.entrada, reserva.saida);
 
         lista.innerHTML += `
-
           <div class="reserva-card">
 
             <div class="reserva-info">
 
               <div class="reserva-header">
 
-                <h2>
-                  ${reserva.responsavel}
-                </h2>
+                <h2>${reserva.responsavel || "Não informado"}</h2>
 
                 <span class="status-reserva">
-                  Reservado
+                  ${status}
                 </span>
 
               </div>
@@ -115,27 +132,27 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
 
                 <div>
                   <small>Telefone</small>
-                  <p>${reserva.telefone}</p>
+                  <p>${reserva.telefone || "Não informado"}</p>
                 </div>
 
                 <div>
                   <small>Quarto</small>
-                  <p>${reserva.quarto}</p>
+                  <p>${reserva.quarto || "Não informado"}</p>
                 </div>
 
                 <div>
-  <small>Pagamento</small>
-  <p>${reserva.pagamento || "Não informado"}</p>
-</div>
+                  <small>Pagamento</small>
+                  <p>${reserva.pagamento || "Não informado"}</p>
+                </div>
 
                 <div>
                   <small>Check-in</small>
-                  <p>${reserva.entrada}</p>
+                  <p>${formatarData(reserva.entrada)}</p>
                 </div>
 
                 <div>
                   <small>Check-out</small>
-                  <p>${reserva.saida}</p>
+                  <p>${formatarData(reserva.saida)}</p>
                 </div>
 
                 <div>
@@ -152,16 +169,16 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
                   <small>Total de hóspedes</small>
                   <p>${reserva.totalHospedes || 0}</p>
                 </div>
-                
-                <div>
-  <small>Diárias</small>
-  <p>${reserva.quantidadeDiarias || 0}</p>
-</div>
 
-<div>
-  <small>Valor da diária</small>
-  <p>R$ ${reserva.valorDiaria || "0,00"}</p>
-</div>
+                <div>
+                  <small>Diárias</small>
+                  <p>${reserva.quantidadeDiarias || 0}</p>
+                </div>
+
+                <div>
+                  <small>Valor da diária</small>
+                  <p>R$ ${reserva.valorDiaria || "0,00"}</p>
+                </div>
 
                 <div>
                   <small>Valor total</small>
@@ -176,39 +193,33 @@ href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22
 
             </div>
 
-            <button
-              onclick="excluirReserva(${index})"
-              class="btn-excluir"
-            >
+            <button onclick="excluirReserva(${index})" class="btn-excluir">
               Excluir Reserva
             </button>
 
           </div>
-
         `;
       });
     }
 
     function excluirReserva(index) {
+      const confirmar = confirm("Tem certeza que deseja excluir esta reserva?");
 
-      let reservas =
-        JSON.parse(localStorage.getItem("cadastros")) || [];
+      if (!confirmar) {
+        return;
+      }
+
+      let reservas = JSON.parse(localStorage.getItem("cadastros")) || [];
 
       reservas.splice(index, 1);
 
-      localStorage.setItem(
-        "cadastros",
-        JSON.stringify(reservas)
-      );
+      localStorage.setItem("cadastros", JSON.stringify(reservas));
 
       carregarReservas();
     }
 
     carregarReservas();
-
   </script>
 
-</body>
-</html> 
 </body>
 </html>
